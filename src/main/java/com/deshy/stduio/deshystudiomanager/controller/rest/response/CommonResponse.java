@@ -10,13 +10,13 @@ import java.util.List;
 @Setter
 @Getter
 public class CommonResponse<T> {
-    private HttpStatus status;
+    private int status;
     private List<String> message;
     private T data;
 
     public static <T> CommonResponse<T> success(T data, CommonCode code) {
         CommonResponse<T> response = new CommonResponse<>();
-        response.setStatus(HttpStatus.valueOf(code.getStatus()));
+        response.setStatus(code.getStatus());
         response.setMessage(Arrays.asList("SUCCESS", code.getMessage()));
         response.setData(data);
         return response;
@@ -24,7 +24,7 @@ public class CommonResponse<T> {
 
     public static <T> CommonResponse<T> fail(CommonCode code) {
         CommonResponse<T> response = new CommonResponse<>();
-        response.setStatus(HttpStatus.valueOf(code.getStatus()));
+        response.setStatus(code.getStatus());
         response.setMessage(Arrays.asList("FAIL", code.getMessage()));
         response.setData(null);
         return response;
@@ -32,7 +32,7 @@ public class CommonResponse<T> {
 
     public static <T> CommonResponse<T> error(CommonCode code) {
         CommonResponse<T> response = new CommonResponse<>();
-        response.setStatus(HttpStatus.valueOf(code.getStatus()));
+        response.setStatus(code.getStatus());
         response.setMessage(Arrays.asList("ERROR", code.getMessage()));
         response.setData(null);
         return response;

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -23,6 +24,9 @@ public class WebSecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/login","/assets/**","/api/users/login","/signup","/api/users/signup").permitAll()
                         .requestMatchers("/page/signup/**").permitAll()
+                        .requestMatchers("/page/server/request/Fetch.js").permitAll()
+                        .requestMatchers("/page/server/request/UserRequest.js").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
@@ -36,7 +40,8 @@ public class WebSecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/api/users/logout")
                         .logoutSuccessUrl("/login")
-                );
+                ).csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         return http.build();
     }
 
