@@ -11,6 +11,8 @@ export default class SignUpUI {
     }
 
     #signupButtonClickEventHandler = async (event) => {
+        event.preventDefault();
+        if(!this.#checkValidity(event)) return;
         const signupForm = document.querySelector('#signupForm');
         const signupData = this.#getSignupData(signupForm);
         const signupResult = await this.signupService.signUp(signupData);
@@ -32,7 +34,16 @@ export default class SignUpUI {
         signupData.memberEmail = signupForm.memberEmail.value;
         signupData.memberId = signupForm.memberId.value;
         signupData.memberPassword = signupForm.memberPassword.value;
-        signupData.memberPhoneNumber = signupForm.memberPhoneNumber.value;
+        signupData.memberPhone = signupForm.memberPhone.value;
         return signupData;
+    }
+
+    #checkValidity(event) {
+        if (!event.target.checkValidity()) {
+            event.stopPropagation();
+            event.target.classList.add('was-validated');
+            return false;
+        }
+        return true;
     }
 }
