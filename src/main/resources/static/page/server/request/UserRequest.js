@@ -10,4 +10,13 @@ export default class UserRequest extends Fetch{
         })
         return jsonResponse;
     }
+
+    async loginCheck(url,body) {
+        const jsonResponse = await this.fetch({
+            url:url,
+            httpMethod:'POST',
+            body:body,
+        })
+        return jsonResponse;
+    }
 }

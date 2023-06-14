@@ -19,9 +19,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
         Optional<Member> memberVO = memberService.findOne(username);
         Member member = memberVO.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
         return User.builder()
-                .username(member.getMemberId())
-                .password(member.getMemberPassword())
-                .roles(member.getMemberRole())
+                .username(member.getId())
+                .password(member.getPassword())
+                .roles(member.getRole())
                 .build();
     }
 }

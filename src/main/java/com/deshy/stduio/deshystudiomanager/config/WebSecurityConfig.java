@@ -27,6 +27,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/page/server/request/Fetch.js").permitAll()
                         .requestMatchers("/page/server/request/UserRequest.js").permitAll()
                         .requestMatchers("/error").permitAll()
+                        .requestMatchers("/api/users/logout").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login

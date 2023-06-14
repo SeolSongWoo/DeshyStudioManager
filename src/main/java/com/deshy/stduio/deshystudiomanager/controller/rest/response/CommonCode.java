@@ -18,6 +18,7 @@ public enum CommonCode {
     // Client error codes
     BAD_REQUEST(400, "Bad request"),
     PAGE_NOT_FOUND(404, "Page not found"),
+    USER_NOT_FOUND(404, "User not found"),
     FORBIDDEN(403, "Forbidden"),
 
     // Server error codes

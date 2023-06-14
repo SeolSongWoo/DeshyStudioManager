@@ -4,20 +4,19 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.lang.NonNull;
 
 @Getter
 @Setter
 @ToString
 public class MemberDTO {
     @NotEmpty
-    private String memberName;
+    private String name;
     @NotEmpty
-    private String memberId;
+    private String id;
     @NotEmpty
-    private String memberPassword;
+    private String password;
     @NotEmpty
-    private String memberEmail;
+    private String email;
     @NotEmpty
-    private String memberPhone;
+    private String phone;
 }

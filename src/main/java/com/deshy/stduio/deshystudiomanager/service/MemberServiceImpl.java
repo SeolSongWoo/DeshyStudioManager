@@ -16,11 +16,11 @@ public class MemberServiceImpl {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     public Optional<Member> findOne(String memberId) {
-        return memberRepository.findMemberByMemberId(memberId);
+        return memberRepository.findMemberById(memberId);
     }
 
     public void signUp(MemberDTO memberDTO) {
-        Member member = Member.createMember(memberDTO.getMemberName(), memberDTO.getMemberId(), memberDTO.getMemberPassword(), memberDTO.getMemberEmail(), memberDTO.getMemberPhone(), passwordEncoder);
+        Member member = Member.createMember(memberDTO.getName(), memberDTO.getId(), memberDTO.getPassword(), memberDTO.getEmail(), memberDTO.getPhone(), passwordEncoder);
         memberRepository.save(member);
     }
 }
