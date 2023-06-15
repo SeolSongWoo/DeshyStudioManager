@@ -7,28 +7,28 @@ export default class SalesVolumeServerRequest extends Fetch{
 
     async getTotalSalesVolume() {
         return await this.fetch({
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getTodaySalesVolume() {
         return await this.fetch({
             url: '/today',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisMonthSalesVolume() {
         return await this.fetch({
             url: '/month',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisYearSalesVolume() {
         return await this.fetch({
             url: '/year',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 }

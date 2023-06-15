@@ -8,28 +8,28 @@ export default class RevenueServerRequest extends Fetch{
 
     async getTotalRevenue() {
         return await this.fetch({
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getTodayRevenue() {
         return await this.fetch({
             url: '/today',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisMonthRevenue() {
         return await this.fetch({
             url: '/month',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisYearRevenue() {
         return await this.fetch({
             url: '/year',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 

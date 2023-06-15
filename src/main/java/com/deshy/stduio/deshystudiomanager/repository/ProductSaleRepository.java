@@ -19,7 +19,7 @@ public interface ProductSaleRepository extends JpaRepository<ProductSale, Long> 
     Optional<Long> findTotalSalesVolume();
 
     //총 순수익
-    @Query("SELECT SUM(ps.saleQuantity * ps.product.originPrice) FROM ProductSale ps")
+    @Query("SELECT SUM(ps.saleQuantity * ps.salePrice) FROM ProductSale ps")
     Optional<Long> findTotalRevenue();
 
     @Query("SELECT SUM(ps.saleQuantity * (ps.salePrice - ps.product.originPrice)) FROM ProductSale ps")
@@ -30,7 +30,7 @@ public interface ProductSaleRepository extends JpaRepository<ProductSale, Long> 
     Optional<Long> findSalesVolumeBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
 
     //특정 기간 동안의 판매액
-    @Query("SELECT SUM(s.saleQuantity * s.product.originPrice) FROM ProductSale s WHERE s.saleDate >= :startDate AND s.saleDate < :endDate")
+    @Query("SELECT SUM(s.saleQuantity * s.salePrice) FROM ProductSale s WHERE s.saleDate >= :startDate AND s.saleDate < :endDate")
     Optional<Long> findRevenueBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
 
     //특정 기간 동안의 순수익

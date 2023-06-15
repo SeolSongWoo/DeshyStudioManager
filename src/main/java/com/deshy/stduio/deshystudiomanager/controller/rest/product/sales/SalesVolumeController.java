@@ -19,26 +19,26 @@ public class SalesVolumeController {
 
     @GetMapping
     public ResponseEntity<CommonResponse<Long>> getTotalSales() {
-        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTotalSalesVolume(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTotalSalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesByProduct(@PathVariable Long productId) {
-        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getSalesVolumeByProduct(productId), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getSalesVolumeByProduct(productId), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/today")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesToday() {
-        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTodaySalesVolume(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTodaySalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/month")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesThisMonth() {
-        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getMonthSalesVolume(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getMonthSalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/year")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesThisYear() {
-        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getYearSalesVolume(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getYearSalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 }

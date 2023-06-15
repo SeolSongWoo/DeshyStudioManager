@@ -18,21 +18,21 @@ public class ProfitController {
 
     @GetMapping
     public ResponseEntity<CommonResponse<Long>> getTotalProfit() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getTotalProfit(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(profitService.getTotalProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/today")
-    public ResponseEntity<CommonResponse<Long>> getTotalProfitToday() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getTodayProfit(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+    public ResponseEntity<CommonResponse<Long>> getTodayTotalProfit() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getTodayProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/month")
-    public ResponseEntity<CommonResponse<Long>> getTotalProfitThisMonth() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfit(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+    public ResponseEntity<CommonResponse<Long>> getThisMonthTotalProfit() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/year")
-    public ResponseEntity<CommonResponse<Long>> getTotalProfitThisYear() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfit(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+    public ResponseEntity<CommonResponse<Long>> getThisYearTotalProfit() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 }

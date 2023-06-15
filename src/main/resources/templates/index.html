@@ -45,7 +45,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a th:href="@{/home}" class="logo d-flex align-items-center">
             <img src="../assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">NiceAdmin</span>
         </a>
@@ -278,7 +278,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="index.html">
+            <a class="nav-link " th:href="@{/home}">
                 <i class="bi bi-grid"></i>
                 <span>한눈에 보기</span>
             </a>
@@ -516,7 +516,7 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -540,21 +540,21 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">오늘</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 달</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 년도</a></li>
+                                    <li><a class="dropdown-item volume-selector" data-function="getTodaySalesVolume" href="#">금일</a></li>
+                                    <li><a class="dropdown-item volume-selector" data-function="getThisMonthSalesVolume" href="#">이번 달</a></li>
+                                    <li><a class="dropdown-item volume-selector" data-function="getThisYearSalesVolume" href="#">이번 년도</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">판매량 <span>| 오늘</span></h5>
+                                <h5 class="card-title">판매량 <span id="salesVolumeCardTitle">| 금일</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6 th:text="${totalSalesVolume}">\</h6>
+                                        <h6 id="salesVolume" th:text="${totalSalesVolume}">\</h6>
                                         <span class="text-success small pt-1 fw-bold">12%</span> <span
                                             class="text-muted small pt-2 ps-1">increase</span>
 
@@ -576,21 +576,21 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">오늘</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 달</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 년도</a></li>
+                                    <li><a class="dropdown-item revenue-selector" href="#" data-function="getTodayRevenue">금일</a></li>
+                                    <li><a class="dropdown-item revenue-selector" href="#" data-function="getThisMonthRevenue">이번 달</a></li>
+                                    <li><a class="dropdown-item revenue-selector" href="#" data-function="getThisYearRevenue">이번 년도</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">매출액 <span>| 이번 달</span></h5>
+                                <h5 class="card-title">매출액 <span id="revenueCardTitle">| 이번 달</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6 th:text="${totalSalesRevenue}+'원'">\</h6>
+                                        <h6 id="revenue"></h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span
                                             class="text-muted small pt-2 ps-1">increase</span>
 
@@ -613,21 +613,21 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">오늘</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 달</a></li>
-                                    <li><a class="dropdown-item" href="#">이번 년도</a></li>
+                                    <li><a class="dropdown-item profit-selector" href="#" data-function="getTodayProfit">금일</a></li>
+                                    <li><a class="dropdown-item profit-selector" href="#" data-function="getThisMonthProfit">이번 달</a></li>
+                                    <li><a class="dropdown-item profit-selector" href="#" data-function="getThisYearProfit">이번 년도</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">순수익 <span>| 이번 년도</span></h5>
+                                <h5 class="card-title">순수익 <span id="profitCardTitle">| 이번 년도</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6 th:text="${totalSalesProfit}+'원'"></h6>
+                                        <h6 id="profit"></h6>
                                         <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                             class="text-muted small pt-2 ps-1">decrease</span>
                                     </div>
@@ -1201,7 +1201,7 @@
 
 <!-- Template Main JS File -->
 <script th:src="@{../assets/js/main.js}"></script>
-
+<script type="module" th:src="@{../page/home/HomeIndex.js}"></script>
 </body>
 
 </html>

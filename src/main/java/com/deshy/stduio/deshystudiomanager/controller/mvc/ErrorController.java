@@ -10,4 +10,9 @@ public class ErrorController {
     public String errorPage() {
         return "error";
     }
+
+    @GetMapping("/server-error")
+    public String serverErrorPage() {
+        return "error500";
+    }
 }

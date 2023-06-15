@@ -6,6 +6,6 @@ export default class SignUpService {
     }
 
     async signUp(body) {
-        return await this.userRequest.signUp('signup', body);
+        return await this.userRequest.signUp(body);
     }
 }

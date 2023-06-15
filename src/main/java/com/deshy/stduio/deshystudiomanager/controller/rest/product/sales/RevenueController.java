@@ -19,21 +19,21 @@ public class RevenueController {
 
     @GetMapping
     public ResponseEntity<CommonResponse<Long>> getTotalRevenue() {
-        return new ResponseEntity<>(CommonResponse.success(revenueService.getTotalRevenue(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getTotalRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/today")
     public ResponseEntity<CommonResponse<Long>> getTotalRevenueToday() {
-        return new ResponseEntity<>(CommonResponse.success(revenueService.getTodayRevenue(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getTodayRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/month")
     public ResponseEntity<CommonResponse<Long>> getTotalRevenueThisMonth() {
-        return new ResponseEntity<>(CommonResponse.success(revenueService.getMonthRevenue(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getMonthRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/year")
     public ResponseEntity<CommonResponse<Long>> getTotalRevenueThisYear() {
-        return new ResponseEntity<>(CommonResponse.success(revenueService.getYearRevenue(), CommonCode.FOUND_OK), HttpStatus.FOUND);
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getYearRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 }

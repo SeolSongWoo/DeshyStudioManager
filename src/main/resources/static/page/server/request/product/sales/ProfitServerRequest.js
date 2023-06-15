@@ -7,28 +7,28 @@ export default class ProfitServerRequest extends Fetch {
 
     async getTotalProfit() {
         return await this.fetch({
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getTodayProfit() {
         return await this.fetch({
             url: '/today',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisMonthProfit() {
         return await this.fetch({
             url: '/month',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 
     async getThisYearProfit() {
         return await this.fetch({
             url: '/year',
-            httpMethod: 'POST',
+            httpMethod: 'GET',
         });
     }
 

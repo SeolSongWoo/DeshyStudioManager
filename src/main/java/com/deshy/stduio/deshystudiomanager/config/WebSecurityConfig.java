@@ -26,7 +26,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/page/signup/**").permitAll()
                         .requestMatchers("/page/server/request/Fetch.js").permitAll()
                         .requestMatchers("/page/server/request/UserRequest.js").permitAll()
-                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/error","/server-error").permitAll()
                         .requestMatchers("/api/users/logout").permitAll()
                         .anyRequest().authenticated()
                 )
