@@ -30,11 +30,11 @@ export default class SignUpUI {
 
     #getSignupData(signupForm) {
         const signupData = {};
-        signupData.memberName = signupForm.memberName.value;
-        signupData.memberEmail = signupForm.memberEmail.value;
-        signupData.memberId = signupForm.memberId.value;
-        signupData.memberPassword = signupForm.memberPassword.value;
-        signupData.memberPhone = signupForm.memberPhone.value;
+        signupData.name = signupForm.memberName.value;
+        signupData.email = signupForm.memberEmail.value;
+        signupData.id = signupForm.memberId.value;
+        signupData.password = signupForm.memberPassword.value;
+        signupData.phone = signupForm.memberPhone.value;
         return signupData;
     }
 
