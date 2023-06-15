@@ -19,16 +19,29 @@ public class Member {
     @GeneratedValue
     private Long memberId;
 
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "id", nullable = false, unique = true)
     private String id;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "phone", nullable = false, unique = true)
     private String phone;
+
+    @Column(name = "role", nullable = false)
     private String role;
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Product> products = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<ProductSale> productSales = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Vendor> vendors = new ArrayList<>();
 
     public Member(Long memberId, String name, String id, String password, String email, String phone, String role) {
         this.memberId = memberId;

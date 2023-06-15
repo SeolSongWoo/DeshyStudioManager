@@ -1,6 +1,8 @@
 package com.deshy.stduio.deshystudiomanager.controller.mvc;
 
 
+import com.deshy.stduio.deshystudiomanager.service.product.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequiredArgsConstructor
 public class URLMappingController {
 
+    private final ProductService productService;
     @GetMapping("/home")
-    public String mainPage() {
-        return "index";
+    public ModelAndView mainPage(Model model) {
+
+        return new ModelAndView("index");
     }
 
     @GetMapping("/login")

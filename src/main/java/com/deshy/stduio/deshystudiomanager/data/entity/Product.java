@@ -15,11 +15,23 @@ public class Product {
     @Id
     @GeneratedValue
     private Long productId;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "type", nullable = false)
     private String type;
+
+    @Column(name = "size", nullable = false)
     private String size;
+
+    @Column(name = "origin_price", nullable = false)
     private Long originPrice;
+
+    @Column(name = "stock_quantity", nullable = false)
     private Long stockQuantity;
+
+    @Column(name = "purchase_date", nullable = false)
     private LocalDate purchaseDate;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductSale> productSales = new ArrayList<>();
