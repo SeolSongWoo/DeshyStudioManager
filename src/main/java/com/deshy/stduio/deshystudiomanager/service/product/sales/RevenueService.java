@@ -50,6 +50,14 @@ public class RevenueService {
         return productSaleRepository.findRevenueBetweenDates(startOfMonth, startOfNextMonth).orElse(0L);
     }
 
+    //최근 한달 동안의 매 시간별 판매액
+    public List<ProductSalesMetricsRevenueDTO> getMonthRevenueByHour() {
+        YearMonth thisMonth = YearMonth.now();
+        LocalDateTime startOfMonth = thisMonth.atDay(1).atStartOfDay();
+        LocalDateTime startOfNextMonth = thisMonth.plusMonths(1).atDay(1).atStartOfDay();
+        return productSalesMetricsRepository.findRevenueBetweenDatesOrderBySaleDate(startOfMonth, startOfNextMonth);
+    }
+
     //최근 일년 동안의 판매액
     public Long getYearRevenue() {
         int thisYear = LocalDate.now().getYear();
@@ -57,6 +65,14 @@ public class RevenueService {
         LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
 
         return productSaleRepository.findRevenueBetweenDates(startOfYear, startOfNextYear).orElse(0L);
+    }
+
+    //최근 일년 동안의 매 시간별 판매액
+    public List<ProductSalesMetricsRevenueDTO> getYearRevenueByHour() {
+        int thisYear = LocalDate.now().getYear();
+        LocalDateTime startOfYear = LocalDateTime.of(thisYear, Month.JANUARY, 1, 0, 0);
+        LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
+        return productSalesMetricsRepository.findRevenueBetweenDatesOrderBySaleDate(startOfYear, startOfNextYear);
     }
 
 }

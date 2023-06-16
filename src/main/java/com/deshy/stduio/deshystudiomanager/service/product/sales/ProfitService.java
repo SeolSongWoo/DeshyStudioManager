@@ -51,6 +51,14 @@ public class ProfitService {
         return productSaleRepository.findProfitBetweenDates(startOfMonth, startOfNextMonth).orElse(0L);
     }
 
+    //최근 한달 동안의 매 시간별 순수익
+    public List<ProductSalesMetricsProfitDTO> getMonthProfitByHour() {
+        YearMonth thisMonth = YearMonth.now();
+        LocalDateTime startOfMonth = thisMonth.atDay(1).atStartOfDay();
+        LocalDateTime startOfNextMonth = thisMonth.plusMonths(1).atDay(1).atStartOfDay();
+        return productSalesMetricsRepository.findProfitBetweenDatesOrderBySaleDate(startOfMonth, startOfNextMonth);
+    }
+
     //최근 일년 동안의 순수익
     public Long getYearProfit() {
         int thisYear = LocalDate.now().getYear();
@@ -58,6 +66,14 @@ public class ProfitService {
         LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
 
         return productSaleRepository.findProfitBetweenDates(startOfYear, startOfNextYear).orElse(0L);
+    }
+
+    //최근 일년 동안의 매 시간별 순수익
+    public List<ProductSalesMetricsProfitDTO> getYearProfitByHour() {
+        int thisYear = LocalDate.now().getYear();
+        LocalDateTime startOfYear = LocalDateTime.of(thisYear, Month.JANUARY, 1, 0, 0);
+        LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
+        return productSalesMetricsRepository.findProfitBetweenDatesOrderBySaleDate(startOfYear, startOfNextYear);
     }
 
 }

@@ -39,8 +39,19 @@ public class ProfitController {
         return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
+    @GetMapping("/month/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsProfitDTO>>> getThisMonthTotalProfitByHour() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfitByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
     @GetMapping("/year")
     public ResponseEntity<CommonResponse<Long>> getThisYearTotalProfit() {
         return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
+
+    @GetMapping("/year/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsProfitDTO>>> getThisYearTotalProfitByHour() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfitByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
 }

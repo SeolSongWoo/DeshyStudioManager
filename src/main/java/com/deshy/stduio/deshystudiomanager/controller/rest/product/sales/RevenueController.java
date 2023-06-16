@@ -40,8 +40,18 @@ public class RevenueController {
         return new ResponseEntity<>(CommonResponse.success(revenueService.getMonthRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
+    @GetMapping("/month/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsRevenueDTO>>> getTotalRevenueThisMonthByHour() {
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getMonthRevenueByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
     @GetMapping("/year")
     public ResponseEntity<CommonResponse<Long>> getTotalRevenueThisYear() {
         return new ResponseEntity<>(CommonResponse.success(revenueService.getYearRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/year/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsRevenueDTO>>> getTotalRevenueThisYearByHour() {
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getYearRevenueByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 }

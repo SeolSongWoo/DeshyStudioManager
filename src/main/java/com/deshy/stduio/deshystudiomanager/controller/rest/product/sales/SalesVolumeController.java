@@ -45,8 +45,18 @@ public class SalesVolumeController {
         return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getMonthSalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
+    @GetMapping("/month/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsSalesVolumeDTO>>> getTotalSalesThisMonthByHour() {
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getMonthSalesVolumeByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
     @GetMapping("/year")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesThisYear() {
         return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getYearSalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/year/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsSalesVolumeDTO>>> getTotalSalesThisYearByHour() {
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getYearSalesVolumeByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 }

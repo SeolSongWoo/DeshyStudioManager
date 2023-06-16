@@ -55,6 +55,14 @@ public class SalesVolumeService {
         return productSaleRepository.findSalesVolumeBetweenDates(startOfMonth, startOfNextMonth).orElse(0L);
     }
 
+    //최근 한달 동안의 매 시간별 판매량
+    public List<ProductSalesMetricsSalesVolumeDTO> getMonthSalesVolumeByHour() {
+        YearMonth thisMonth = YearMonth.now();
+        LocalDateTime startOfMonth = thisMonth.atDay(1).atStartOfDay();
+        LocalDateTime startOfNextMonth = thisMonth.plusMonths(1).atDay(1).atStartOfDay();
+        return productSalesMetricsRepository.findSalesVolumeBetweenDatesOrderBySaleDate(startOfMonth, startOfNextMonth);
+    }
+
     //최근 일년 동안의 판매량
     public Long getYearSalesVolume() {
         int thisYear = LocalDate.now().getYear();
@@ -62,6 +70,14 @@ public class SalesVolumeService {
         LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
 
         return productSaleRepository.findSalesVolumeBetweenDates(startOfYear, startOfNextYear).orElse(0L);
+    }
+
+    //최근 일년 동안의 매 시간별 판매량
+    public List<ProductSalesMetricsSalesVolumeDTO> getYearSalesVolumeByHour() {
+        int thisYear = LocalDate.now().getYear();
+        LocalDateTime startOfYear = LocalDateTime.of(thisYear, Month.JANUARY, 1, 0, 0);
+        LocalDateTime startOfNextYear = LocalDateTime.of(thisYear + 1, Month.JANUARY, 1, 0, 0);
+        return productSalesMetricsRepository.findSalesVolumeBetweenDatesOrderBySaleDate(startOfYear, startOfNextYear);
     }
 
 }
