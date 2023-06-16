@@ -2,6 +2,7 @@ package com.deshy.stduio.deshystudiomanager.controller.rest.product.sales;
 
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.metrics.ProductSalesMetricsSalesVolumeDTO;
 import com.deshy.stduio.deshystudiomanager.service.product.sales.SalesVolumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequestMapping("/api/products/sales/volume")
 @RestController
@@ -30,6 +33,11 @@ public class SalesVolumeController {
     @GetMapping("/today")
     public ResponseEntity<CommonResponse<Long>> getTotalSalesToday() {
         return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTodaySalesVolume(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/today/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsSalesVolumeDTO>>> getTotalSalesTodayByHour() {
+        return new ResponseEntity<>(CommonResponse.success(salesVolumeService.getTodaySalesVolumeByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/month")

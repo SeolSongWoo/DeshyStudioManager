@@ -18,26 +18,30 @@ const initTextContent = () => {
     ]);
 }
 
+const initChartSettings = () => {
+    co
+}
+
 const initEventListeners = () => {
-    const mainSalesPerformanceSelectorAddEvents = () => {
-        const mainSalesPerformanceSelectorArray = [
+    const mainSalesInformationFilterAddEvents = () => {
+        const mainSalesInformationFilterArray = [
             {
-                className : '.volume-selector',
+                className : '.volume-filter',
                 textToElement : document.getElementById('salesVolume'),
                 CardTitleTextToElement : document.getElementById('salesVolumeCardTitle'),
             },
             {
-                className : '.revenue-selector',
+                className : '.revenue-filter',
                 textToElement : document.getElementById('revenue'),
                 CardTitleTextToElement : document.getElementById('revenueCardTitle'),
             },
             {
-                className : '.profit-selector',
+                className : '.profit-filter',
                 textToElement : document.getElementById('profit'),
                 CardTitleTextToElement : document.getElementById('profitCardTitle'),
             }
         ];
-        mainSalesPerformanceSelectorArray.forEach((object) => {
+        mainSalesInformationFilterArray.forEach((object) => {
             document.querySelectorAll(object.className).forEach((element) => {
                 const methodName = element.getAttribute('data-function');
                 homeUI.addClickListenerToUpdateTextContent(element,object.textToElement,methodName);
@@ -48,7 +52,7 @@ const initEventListeners = () => {
         });
     }
 
-    mainSalesPerformanceSelectorAddEvents();
+    mainSalesInformationFilterAddEvents();
 }
 
 const asyncProcess = async () => {

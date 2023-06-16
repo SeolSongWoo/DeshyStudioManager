@@ -15,5 +15,5 @@ spring:
     cache: false
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 

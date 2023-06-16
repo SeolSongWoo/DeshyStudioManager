@@ -2,6 +2,7 @@ package com.deshy.stduio.deshystudiomanager.controller.rest.product.sales;
 
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.metrics.ProductSalesMetricsRevenueDTO;
 import com.deshy.stduio.deshystudiomanager.service.product.sales.RevenueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequestMapping("/api/products/sales/revenue")
 @RestController
@@ -25,6 +28,11 @@ public class RevenueController {
     @GetMapping("/today")
     public ResponseEntity<CommonResponse<Long>> getTotalRevenueToday() {
         return new ResponseEntity<>(CommonResponse.success(revenueService.getTodayRevenue(), CommonCode.FOUND_OK), HttpStatus.OK);
+    }
+
+    @GetMapping("/today/hour")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsRevenueDTO>>> getTotalRevenueTodayByHour() {
+        return new ResponseEntity<>(CommonResponse.success(revenueService.getTodayRevenueByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/month")

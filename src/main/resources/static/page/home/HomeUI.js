@@ -16,6 +16,12 @@ export default class HomeUI {
         });
     }
 
+    setDefaultChartSettings({series, colors,xaxis,}) {
+        series.forEach((object) => {
+            
+        });
+    }
+
     get homeService() {
         return this.#homeService;
     }
