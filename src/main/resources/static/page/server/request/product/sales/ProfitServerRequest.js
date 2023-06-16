@@ -18,6 +18,13 @@ export default class ProfitServerRequest extends Fetch {
         });
     }
 
+    async getTodayProfitByHour() {
+        return await this.fetch({
+            url: '/today/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisMonthProfit() {
         return await this.fetch({
             url: '/month',
@@ -25,9 +32,23 @@ export default class ProfitServerRequest extends Fetch {
         });
     }
 
+    async getThisMonthProfitByHour() {
+        return await this.fetch({
+            url: '/month/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisYearProfit() {
         return await this.fetch({
             url: '/year',
+            httpMethod: 'GET',
+        });
+    }
+
+    async getThisYearProfitByHour() {
+        return await this.fetch({
+            url: '/year/hour',
             httpMethod: 'GET',
         });
     }

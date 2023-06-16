@@ -18,6 +18,13 @@ export default class SalesVolumeServerRequest extends Fetch{
         });
     }
 
+    async getTodaySalesVolumeByHour() {
+        return await this.fetch({
+            url: '/today/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisMonthSalesVolume() {
         return await this.fetch({
             url: '/month',
@@ -25,9 +32,23 @@ export default class SalesVolumeServerRequest extends Fetch{
         });
     }
 
+    async getThisMonthSalesVolumeByHour() {
+        return await this.fetch({
+            url: '/month/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisYearSalesVolume() {
         return await this.fetch({
             url: '/year',
+            httpMethod: 'GET',
+        });
+    }
+
+    async getThisYearSalesByHour() {
+        return await this.fetch({
+            url: '/year/hour',
             httpMethod: 'GET',
         });
     }

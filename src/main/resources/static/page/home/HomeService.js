@@ -63,7 +63,53 @@ export default class HomeService {
         return this.#formatPrice(data);
     }
 
+    async getTodaySalesVolumeByHour() {
+        const response = await this.salesVolumeRequest.getTodaySalesVolumeByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisMonthSalesVolumeByHour() {
+        const response = await this.salesVolumeRequest.getThisMonthSalesVolumeByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisYearSalesByHour() {
+        const response = await this.salesVolumeRequest.getThisYearSalesByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getTodayRevenueByHour() {
+        const response = await this.revenueRequest.getTodayRevenueByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisMonthRevenueByHour() {
+        const response = await this.revenueRequest.getThisMonthRevenueByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisYearRevenueByHour() {
+        const response = await this.revenueRequest.getThisYearRevenueByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getTodayProfitByHour() {
+        const response = await this.profitRequest.getTodayProfitByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisMonthProfitByHour() {
+        const response = await this.profitRequest.getThisMonthProfitByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getThisYearProfitByHour() {
+        const response = await this.profitRequest.getThisYearProfitByHour();
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
     #formatPrice(price) {
         return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
     }
+
 }

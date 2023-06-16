@@ -19,6 +19,13 @@ export default class RevenueServerRequest extends Fetch{
         });
     }
 
+    async getTodayRevenueByHour() {
+        return await this.fetch({
+            url: '/today/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisMonthRevenue() {
         return await this.fetch({
             url: '/month',
@@ -26,9 +33,23 @@ export default class RevenueServerRequest extends Fetch{
         });
     }
 
+    async getThisMonthRevenueByHour() {
+        return await this.fetch({
+            url: '/month/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisYearRevenue() {
         return await this.fetch({
             url: '/year',
+            httpMethod: 'GET',
+        });
+    }
+
+    async getThisYearRevenueByHour() {
+        return await this.fetch({
+            url: '/year/hour',
             httpMethod: 'GET',
         });
     }

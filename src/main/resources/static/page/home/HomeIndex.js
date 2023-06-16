@@ -19,7 +19,14 @@ const initTextContent = () => {
 }
 
 const initChartSettings = () => {
-    co
+    const salesChartInit = async () => {
+        const salesChartElement = document.getElementById('reportsChart');
+        await homeUI.setSalesChart(salesChartElement)
+    }
+
+    return Promise.all([
+        salesChartInit(),
+    ]);
 }
 
 const initEventListeners = () => {
@@ -58,6 +65,7 @@ const initEventListeners = () => {
 const asyncProcess = async () => {
     await Promise.all([
         initTextContent(),
+        initChartSettings(),
         ]
     );
 }
