@@ -16,40 +16,53 @@ export default class HomeUI {
         });
     }
 
-    async setSalesChart(element) {
-        // 데이터 가져오기
-        const salesData = await this.#homeService.getTodaySalesVolumeByHour();
-        const revenueData = await this.#homeService.getTodayRevenueByHour();
-        const profitData = await this.#homeService.getTodayProfitByHour();
+    addClickListenerToUpdateChart(listenerElement, chartElement, serviceMethod) {
+        listenerElement.addEventListener('click', async () => {
+            await this.setSalesChart(chartElement,serviceMethod);
+        });
+    }
 
-        const hours = this.getHoursForToday();
+    async setSalesChart(element,methodName) {
+        element.innerHTML = '';
+        const salesMetricsChartData = await this.#homeService[methodName]();
 
-        const salesVolumeSeries = this.#fillMissingData(salesData, hours,'salesVolume');
-        const revenueSeries = this.#fillMissingData(revenueData, hours,'revenue');
-        const profitSeries = this.#fillMissingData(profitData, hours,'profit');
+        const xaxis = salesMetricsChartData.xaxis;
+
+        const salesVolumeSeries = this.#fillMissingData(salesMetricsChartData.volume, xaxis,'salesVolume');
+        const revenueSeries = this.#fillMissingData(salesMetricsChartData.revenue, xaxis,'revenue');
+        const profitSeries = this.#fillMissingData(salesMetricsChartData.profit, xaxis,'profit');
 
         const series = [{
             name: 'Sales Volume',
-            data: salesVolumeSeries
+            data: salesVolumeSeries.map((value, index) => ({ x: xaxis[index], y: value }))
         }, {
             name: 'Revenue',
-            data: revenueSeries
+            data: revenueSeries.map((value, index) => ({ x: xaxis[index], y: value }))
         }, {
             name: 'Profit',
-            data: profitSeries
+            data: profitSeries.map((value, index) => ({ x: xaxis[index], y: value }))
         }];
 
         const colors = ['#4154f1', '#2eca6a', '#ff771d'];
 
-        const categories = hours;
 
-        await this.createChart('area', element, series, categories,colors,'today');
+        await this.createChart('area', element, series, xaxis,colors,'today');
     }
 
-    async createChart(chartType, element, series, categories,colors) {
+    async createChart(chartType, element, series, xaxis,colors) {
         const options = {
             chart: {
                 type: chartType,
+                defaultLocale: 'kr',
+                locales: [{
+                   name : 'kr',
+                     options : {
+                       months : ['1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월'],
+                       shortMonths : ['1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월'],
+                       days : ['일', '월', '화', '수', '목', '금', '토'],
+                       shortDays : ['일', '월', '화', '수', '목', '금', '토'],
+                     }
+                }],
                 height: 350,
                 toolbar: {
                     show: false
@@ -78,11 +91,21 @@ export default class HomeUI {
             series: series,
             xaxis: {
                 type : 'datetime',
-                categories: categories
+                min: xaxis[0],
+                max: xaxis[xaxis.length - 1],
+                labels: {
+                    datetimeUTC: false,
+                    datetimeFormatter: {
+                        year: 'yyyy',
+                        month: 'yy년 MMM',
+                        day: 'MMM dd일',
+                        hour: 'HH:mm'
+                    }
+                }
             },
             tooltip: {
                 x: {
-                    format: 'dd/MM/yy HH:mm'
+                    format: 'yy년 MM월 dd일 HH시 mm분'
                 },
             }
         };
@@ -91,56 +114,39 @@ export default class HomeUI {
         chart.render();
     }
 
-    getHoursForToday() {
-        const now = new Date();
-        now.setHours(now.getHours() + 9); // 한국 시간대를 반영합니다.
-
-        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-        start.setHours(start.getHours() + 9); // 한국 시간대를 반영합니다.
-
-        for (var arr = [], dt = start; dt <= now; dt.setHours(dt.getHours() + 1)) {
-            arr.push(new Date(dt));
-        }
-
-        return arr.map(date => {
-            date.setHours(date.getHours() - 9); // UTC로 복원합니다.
-            return date.toISOString();
-        });
+    async setRecentSalesTBody(element) {
+        const recentSales = await this.#homeService.getRecentSalesByPaging(0,5);
+        element.innerHTML = '';
+        recentSales.dtoData.forEach((item,index) => {
+            const tr = document.createElement('tr');
+            const revenue = this.#homeService.formatPrice(item.saleQuantity * item.salePrice);
+            const profit = this.#homeService.formatPrice(item.saleQuantity * (item.salePrice - item.originPrice));
+            const profitRate = (((item.saleQuantity* (item.salePrice - item.originPrice))/(item.saleQuantity * item.salePrice))*100).toFixed(0);
+            tr.innerHTML = `
+            <th>${index}</th>
+            <td>${item.saleDate}</td>
+            <td>${item.productName}</td>
+            <td>${item.saleQuantity}</td>
+            <td>${revenue}/${profit}\</td>
+            <td>${profitRate}%</td>
+            `;
+            element.appendChild(tr);
+        })
     }
 
-    #getDatesForCurrentMonth() {
-        const now = new Date()
-        const start = new Date(now.getFullYear(), now.getMonth(), 1);
-        const end = new Date();
-
-        for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-            arr.push(new Date(dt));
-        }
-
-        return arr.map(date => date.toISOString());
-    }
-
-// 이번년도의 월을 가져오는 함수
-    getMonthsForThisYear() {
-        const now = new Date()
-        const start = new Date(now.getFullYear(), 0, 1);
-
-        for (var arr = [], dt = start; dt <= now; dt.setMonth(dt.getMonth() + 1)) {
-            arr.push(new Date(dt));
-        }
-
-        return arr.map(date => date.toISOString());
-    }
     #fillMissingData(originalData, dates,salesMetricsName) {
-        const filledData = dates.map(date => {
-            const foundData = originalData.find(item => item.saleDate === date);
+        originalData = originalData || [];
+        return dates.map(date => {
+            const foundData = originalData.find(item => {
+                const itemDate = new Date(item.salesDate);
+                const dateDate = new Date(date);
+                return itemDate.getTime() === dateDate.getTime();
+            });
             return foundData ? foundData[salesMetricsName] : 0;
         });
-        return filledData;
     }
 
     get homeService() {
         return this.#homeService;
     }
-
 }

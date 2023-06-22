@@ -2,7 +2,7 @@ import Fetch from "../../Fetch.js";
 
 export default class SalesVolumeServerRequest extends Fetch{
     constructor() {
-        super('/api/products/sales/volume');
+        super('/api/products/metrics/volume');
     }
 
     async getTotalSalesVolume() {
@@ -34,7 +34,7 @@ export default class SalesVolumeServerRequest extends Fetch{
 
     async getThisMonthSalesVolumeByHour() {
         return await this.fetch({
-            url: '/month/hour',
+            url: '/month/day',
             httpMethod: 'GET',
         });
     }
@@ -48,7 +48,7 @@ export default class SalesVolumeServerRequest extends Fetch{
 
     async getThisYearSalesByHour() {
         return await this.fetch({
-            url: '/year/hour',
+            url: '/year/month',
             httpMethod: 'GET',
         });
     }

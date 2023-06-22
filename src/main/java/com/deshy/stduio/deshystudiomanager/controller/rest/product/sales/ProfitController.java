@@ -2,8 +2,8 @@ package com.deshy.stduio.deshystudiomanager.controller.rest.product.sales;
 
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
-import com.deshy.stduio.deshystudiomanager.data.dto.product.metrics.ProductSalesMetricsProfitDTO;
-import com.deshy.stduio.deshystudiomanager.service.product.sales.ProfitService;
+import com.deshy.stduio.deshystudiomanager.data.dto.ProductSalesMetricsDTO;
+import com.deshy.stduio.deshystudiomanager.service.product.metrics.ProfitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/products/sales/profit")
+@RequestMapping("/api/products/metrics/profit")
 public class ProfitController {
     private final ProfitService profitService;
 
@@ -30,7 +30,7 @@ public class ProfitController {
     }
 
     @GetMapping("/today/hour")
-    public ResponseEntity<CommonResponse<List<ProductSalesMetricsProfitDTO>>> getTodayTotalProfitByHour() {
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsDTO>>> getTodayTotalProfitByHour() {
         return new ResponseEntity<>(CommonResponse.success(profitService.getTodayProfitByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
@@ -39,9 +39,9 @@ public class ProfitController {
         return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
-    @GetMapping("/month/hour")
-    public ResponseEntity<CommonResponse<List<ProductSalesMetricsProfitDTO>>> getThisMonthTotalProfitByHour() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfitByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    @GetMapping("/month/day")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsDTO>>> getThisMonthTotalProfitByHour() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getMonthProfitByDay(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
     @GetMapping("/year")
@@ -49,9 +49,9 @@ public class ProfitController {
         return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfit(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
-    @GetMapping("/year/hour")
-    public ResponseEntity<CommonResponse<List<ProductSalesMetricsProfitDTO>>> getThisYearTotalProfitByHour() {
-        return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfitByHour(), CommonCode.FOUND_OK), HttpStatus.OK);
+    @GetMapping("/year/month")
+    public ResponseEntity<CommonResponse<List<ProductSalesMetricsDTO>>> getThisYearTotalProfitByHour() {
+        return new ResponseEntity<>(CommonResponse.success(profitService.getYearProfitByMonth(), CommonCode.FOUND_OK), HttpStatus.OK);
     }
 
 }
