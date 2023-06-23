@@ -3,7 +3,7 @@ import Fetch from "../../Fetch.js";
 export default class RevenueServerRequest extends Fetch{
 
     constructor() {
-        super('/api/products/sales/revenue');
+        super('/api/products/metrics/revenue');
     }
 
     async getTotalRevenue() {
@@ -19,6 +19,13 @@ export default class RevenueServerRequest extends Fetch{
         });
     }
 
+    async getTodayRevenueByHour() {
+        return await this.fetch({
+            url: '/today/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisMonthRevenue() {
         return await this.fetch({
             url: '/month',
@@ -26,9 +33,23 @@ export default class RevenueServerRequest extends Fetch{
         });
     }
 
+    async getThisMonthRevenueByHour() {
+        return await this.fetch({
+            url: '/month/day',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisYearRevenue() {
         return await this.fetch({
             url: '/year',
+            httpMethod: 'GET',
+        });
+    }
+
+    async getThisYearRevenueByHour() {
+        return await this.fetch({
+            url: '/year/month',
             httpMethod: 'GET',
         });
     }

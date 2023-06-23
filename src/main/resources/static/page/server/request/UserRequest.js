@@ -5,7 +5,7 @@ export default class UserRequest extends Fetch{
         super('/api/users');
     }
 
-    async signUp(url,body) {
+    async signUp(body) {
         return await this.fetch({
             url: '/signup',
             httpMethod: 'POST',

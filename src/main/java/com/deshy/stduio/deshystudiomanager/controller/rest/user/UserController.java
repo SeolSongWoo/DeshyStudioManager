@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.controller.rest;
+package com.deshy.stduio.deshystudiomanager.controller.rest.user;
 
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;

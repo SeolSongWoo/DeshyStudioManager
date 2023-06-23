@@ -19,31 +19,31 @@ public class RestGlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<CommonResponse<?>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("handleMethodArgumentNotValidException", e);
+        log.info("handleMethodArgumentNotValidException", e);
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MissingPathVariableException.class)
     public ResponseEntity<CommonResponse<?>> handleMissingPathVariableException(MissingPathVariableException e) {
-        log.error("handleMissingPathVariableException", e);
+        log.info("handleMissingPathVariableException", e);
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(TypeMismatchException.class)
     public ResponseEntity<CommonResponse<?>> handleTypeMismatchException(TypeMismatchException e) {
-        log.error("handleTypeMismatchException", e);
+        log.info("handleTypeMismatchException", e);
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<CommonResponse<?>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        log.error("handleMethodArgumentTypeMismatchException", e);
+        log.info("handleMethodArgumentTypeMismatchException", e);
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<CommonResponse<?>> handleUserNameNotFoundExceptionHandler(UsernameNotFoundException e) {
-        log.error("handleUserNameNotFoundExceptionHandler",e);
+        log.info("handleUserNameNotFoundExceptionHandler",e);
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.USER_NOT_FOUND),HttpStatus.NOT_FOUND);
     }
 

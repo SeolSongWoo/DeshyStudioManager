@@ -13,47 +13,83 @@ const initTextContent = () => {
         ]);
     }
 
+    const recentSalesSetTextContents = () => {
+        const recentSalesTBodyElement = document.getElementById('recentSales');
+        const tbody = recentSalesTBodyElement.getElementsByTagName('tbody')[0];
+        return homeUI.setRecentSalesTBody(tbody);
+    }
+
     return Promise.all([
         SalesPerformanceSetTextContents(),
+        recentSalesSetTextContents(),
+    ]);
+}
+
+const initChartSettings = () => {
+    const salesChartInit = async () => {
+        const salesChartElement = document.getElementById('reportsChart');
+        await homeUI.setSalesChart(salesChartElement,'getTodaySalesMetricsChartData');
+    }
+
+    return Promise.all([
+        salesChartInit(),
     ]);
 }
 
 const initEventListeners = () => {
-    const mainSalesPerformanceSelectorAddEvents = () => {
-        const mainSalesPerformanceSelectorArray = [
+    const mainSalesInformationFilterAddEvents = () => {
+        const mainSalesInformationFilterArray = [
             {
-                className : '.volume-selector',
+                className : '.volume-filter',
                 textToElement : document.getElementById('salesVolume'),
-                CardTitleTextToElement : document.getElementById('salesVolumeCardTitle'),
+                CurrentDateTextToElement : document.getElementById('salesVolumeCardTitle'),
             },
             {
-                className : '.revenue-selector',
+                className : '.revenue-filter',
                 textToElement : document.getElementById('revenue'),
-                CardTitleTextToElement : document.getElementById('revenueCardTitle'),
+                CurrentDateTextToElement : document.getElementById('revenueCardTitle'),
             },
             {
-                className : '.profit-selector',
+                className : '.profit-filter',
                 textToElement : document.getElementById('profit'),
-                CardTitleTextToElement : document.getElementById('profitCardTitle'),
+                CurrentDateTextToElement : document.getElementById('profitCardTitle'),
             }
         ];
-        mainSalesPerformanceSelectorArray.forEach((object) => {
+        mainSalesInformationFilterArray.forEach((object) => {
             document.querySelectorAll(object.className).forEach((element) => {
                 const methodName = element.getAttribute('data-function');
                 homeUI.addClickListenerToUpdateTextContent(element,object.textToElement,methodName);
                 element.addEventListener('click', () => {
-                    object.CardTitleTextToElement.textContent = `| ${element.textContent}`;
+                    object.CurrentDateTextToElement.textContent = `| ${element.textContent}`;
                 });
             });
         });
     }
 
-    mainSalesPerformanceSelectorAddEvents();
+    const chartSalesInformationFilterAddEvents = () => {
+        const chartSalesInformationFilterObject =
+            {
+                className : '.chart-filter',
+                chartElement : document.getElementById('reportsChart'),
+                CurrentDateTextToElement : document.getElementById('chartCardTitle'),
+            };
+        document.querySelectorAll(chartSalesInformationFilterObject.className).forEach((element) => {
+            const methodName = element.getAttribute('data-function');
+            homeUI.addClickListenerToUpdateChart(element,chartSalesInformationFilterObject.chartElement,methodName);
+            element.addEventListener('click', () => {
+                chartSalesInformationFilterObject.CurrentDateTextToElement.textContent = `| ${element.textContent}`;
+            });
+        });
+    }
+
+    mainSalesInformationFilterAddEvents();
+    chartSalesInformationFilterAddEvents();
 }
 
 const asyncProcess = async () => {
     await Promise.all([
         initTextContent(),
+        initChartSettings(),
         ]
     );
 }

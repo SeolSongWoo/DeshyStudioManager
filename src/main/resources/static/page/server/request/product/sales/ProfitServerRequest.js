@@ -2,7 +2,7 @@ import Fetch from "../../Fetch.js";
 
 export default class ProfitServerRequest extends Fetch {
     constructor() {
-        super('/api/products/sales/profit');
+        super('/api/products/metrics/profit');
     }
 
     async getTotalProfit() {
@@ -18,6 +18,13 @@ export default class ProfitServerRequest extends Fetch {
         });
     }
 
+    async getTodayProfitByHour() {
+        return await this.fetch({
+            url: '/today/hour',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisMonthProfit() {
         return await this.fetch({
             url: '/month',
@@ -25,9 +32,23 @@ export default class ProfitServerRequest extends Fetch {
         });
     }
 
+    async getThisMonthProfitByHour() {
+        return await this.fetch({
+            url: '/month/day',
+            httpMethod: 'GET',
+        });
+    }
+
     async getThisYearProfit() {
         return await this.fetch({
             url: '/year',
+            httpMethod: 'GET',
+        });
+    }
+
+    async getThisYearProfitByHour() {
+        return await this.fetch({
+            url: '/year/month',
             httpMethod: 'GET',
         });
     }
