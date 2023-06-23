@@ -1,7 +1,7 @@
 import HomeUI from "./HomeUI.js";
 
 const homeUI = new HomeUI();
-const initTextContent = () => {
+function initTextContent() {
     const SalesPerformanceSetTextContents = () => {
         const profitTextElement = document.getElementById('profit');
         const revenueTextElement = document.getElementById('revenue');
@@ -14,18 +14,25 @@ const initTextContent = () => {
     }
 
     const recentSalesSetTextContents = () => {
-        const recentSalesTBodyElement = document.getElementById('recentSales');
-        const tbody = recentSalesTBodyElement.getElementsByTagName('tbody')[0];
+        const recentSalesTable = document.getElementById('recentSales');
+        const tbody = recentSalesTable.getElementsByTagName('tbody')[0];
         return homeUI.setRecentSalesTBody(tbody);
+    }
+
+    const top3VendorSalesSetTextContents = () => {
+        const vendorSalesTable = document.getElementById('vendorSales');
+        const tbody = vendorSalesTable.getElementsByTagName('tbody')[0];
+        return homeUI.setTop3VendorSalesTBody(tbody,'getTop3VolumeVendorsByLimits');
     }
 
     return Promise.all([
         SalesPerformanceSetTextContents(),
         recentSalesSetTextContents(),
+        top3VendorSalesSetTextContents(),
     ]);
 }
 
-const initChartSettings = () => {
+function initChartSettings() {
     const salesChartInit = async () => {
         const salesChartElement = document.getElementById('reportsChart');
         await homeUI.setSalesChart(salesChartElement,'getTodaySalesMetricsChartData');
@@ -36,7 +43,7 @@ const initChartSettings = () => {
     ]);
 }
 
-const initEventListeners = () => {
+function initEventListeners() {
     const mainSalesInformationFilterAddEvents = () => {
         const mainSalesInformationFilterArray = [
             {
@@ -86,15 +93,15 @@ const initEventListeners = () => {
     chartSalesInformationFilterAddEvents();
 }
 
-const asyncProcess = async () => {
-    await Promise.all([
+function asyncProcess() {
+    return Promise.all([
         initTextContent(),
         initChartSettings(),
         ]
     );
 }
 
-const initializeHome = async () => {
+async function initializeHome() {
     await asyncProcess();
     initEventListeners();
 }

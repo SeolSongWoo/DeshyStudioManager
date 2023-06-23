@@ -4,6 +4,8 @@ import RevenueServerRequest from "../server/request/product/sales/RevenueServerR
 import SalesVolumeServerRequest from "../server/request/product/sales/SalesVolumeServerRequest.js";
 import ServerErrorHandle from "../exception/ServerErrorHandle.js";
 import SaleServerRequest from "../server/request/product/sales/SaleServerRequest.js";
+import Util from "../util/Util.js";
+import VendorSalesServerRequest from "../server/request/vendor/VendorSalesServerRequest.js";
 
 export default class HomeService {
     constructor() {
@@ -12,6 +14,7 @@ export default class HomeService {
         this.revenueRequest = new RevenueServerRequest();
         this.salesVolumeRequest = new SalesVolumeServerRequest();
         this.saleServerRequest = new SaleServerRequest();
+        this.vendorSalesServerRequest = new VendorSalesServerRequest();
     }
 
     async getTodaySalesVolume() {
@@ -22,13 +25,13 @@ export default class HomeService {
     async getTodayRevenue() {
         const response = await this.revenueRequest.getTodayRevenue();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getTodayProfit() {
         const response = await this.profitRequest.getTodayProfit();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getThisMonthSalesVolume() {
@@ -39,13 +42,13 @@ export default class HomeService {
     async getThisMonthRevenue() {
         const response = await this.revenueRequest.getThisMonthRevenue();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getThisMonthProfit() {
         const response = await this.profitRequest.getThisMonthProfit();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getThisYearSalesVolume() {
@@ -56,13 +59,13 @@ export default class HomeService {
     async getThisYearRevenue() {
         const response = await this.revenueRequest.getThisYearRevenue();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getThisYearProfit() {
         const response = await this.profitRequest.getThisYearProfit();
         const data = ServerErrorHandle.checkResponseStatus(response);
-        return this.formatPrice(data);
+        return Util.formatPrice(data);
     }
 
     async getTodaySalesMetricsChartData() {
@@ -94,6 +97,11 @@ export default class HomeService {
 
     async getRecentSalesByPaging(startPage,endPage) {
         const response = await this.saleServerRequest.getAllSaleByPaging(startPage,endPage);
+        return ServerErrorHandle.checkResponseStatus(response);
+    }
+
+    async getTop3VolumeVendorsByLimits() {
+        const response = await this.vendorSalesServerRequest.getTopVolumeVendorsByLimits(3);
         return ServerErrorHandle.checkResponseStatus(response);
     }
 
@@ -133,10 +141,5 @@ export default class HomeService {
         return times;
     }
 
-
-
-    formatPrice(price) {
-        return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price);
-    }
 
 }
