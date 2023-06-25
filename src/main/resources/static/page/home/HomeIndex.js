@@ -1,6 +1,12 @@
 import HomeUI from "./HomeUI.js";
 
 const homeUI = new HomeUI();
+
+function initPageTab() {
+    document.querySelectorAll('.page-select').forEach(element => {
+        homeUI.addPageTabClickEvent(element)
+    })
+}
 function initTextContent() {
     const SalesPerformanceSetTextContents = () => {
         const profitTextElement = document.getElementById('profit');
@@ -104,6 +110,7 @@ function asyncProcess() {
 async function initializeHome() {
     await asyncProcess();
     initEventListeners();
+    initPageTab();
 }
 
 initializeHome();

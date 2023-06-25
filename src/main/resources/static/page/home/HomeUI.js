@@ -162,4 +162,28 @@ export default class HomeUI {
     get homeService() {
         return this.#homeService;
     }
+
+    addPageTabClickEvent(element) {
+        element.addEventListener('click',e => {
+            const pageName = e.currentTarget.id;
+            switch (pageName) {
+                case 'index-page':
+                    if(nowPage === 'index-page') return;
+                    const indexMainElement = document.querySelector('[data-page="index-page"]');
+                    indexMainElement.style.display = 'block';
+                    document.querySelector(`[data-page=${nowPage}]`).style.display = 'none';
+                    window.nowPage ='index-page';
+                    break;
+                case 'product-reg-page':
+                    if(nowPage === 'product-reg-page') return;
+                    const productRegPageElement = document.querySelector('[data-page="product-reg-page"]');
+                    productRegPageElement.style.display = 'block';
+                    document.querySelector(`[data-page=${nowPage}]`).style.display = 'none';
+                    window.nowPage = 'product-reg-page'
+                    break;
+                default :
+                    return;
+            }
+        });
+    }
 }
