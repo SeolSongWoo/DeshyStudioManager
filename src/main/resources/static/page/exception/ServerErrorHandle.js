@@ -5,7 +5,8 @@ export default class ServerErrorHandle {
             return response.data;
         }
         else {
-            //location.href = "/server-error"
+            location.href = "/server-error"
+            console.error(response.status,response.message)
         }
     }
 

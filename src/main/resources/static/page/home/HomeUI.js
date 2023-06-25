@@ -1,4 +1,5 @@
 import HomeService from "./HomeService.js";
+import Util from "../util/Util.js";
 
 export default class HomeUI {
     #homeService;
@@ -28,9 +29,9 @@ export default class HomeUI {
 
         const xaxis = salesMetricsChartData.xaxis;
 
-        const salesVolumeSeries = this.#fillMissingData(salesMetricsChartData.volume, xaxis,'salesVolume');
-        const revenueSeries = this.#fillMissingData(salesMetricsChartData.revenue, xaxis,'revenue');
-        const profitSeries = this.#fillMissingData(salesMetricsChartData.profit, xaxis,'profit');
+        const salesVolumeSeries = Util.fillMissingData(salesMetricsChartData.volume, xaxis,'salesVolume');
+        const revenueSeries = Util.fillMissingData(salesMetricsChartData.revenue, xaxis,'revenue');
+        const profitSeries = Util.fillMissingData(salesMetricsChartData.profit, xaxis,'profit');
 
         const series = [{
             name: 'Sales Volume',
@@ -45,14 +46,20 @@ export default class HomeUI {
 
         const colors = ['#4154f1', '#2eca6a', '#ff771d'];
 
-
-        await this.createChart('area', element, series, xaxis,colors,'today');
+        const options = {
+            chartType : 'area',
+            element : element,
+            series : series,
+            xaxis : xaxis,
+            colors : colors,
+        }
+        await this.createChart(options);
     }
 
-    async createChart(chartType, element, series, xaxis,colors) {
-        const options = {
+    async createChart(options) {
+        const chartOptions = {
             chart: {
-                type: chartType,
+                type: options.chartType,
                 defaultLocale: 'kr',
                 locales: [{
                    name : 'kr',
@@ -71,7 +78,7 @@ export default class HomeUI {
             markers: {
                 size: 4,
             },
-            colors: colors,
+            colors: options.colors,
             fill: {
                 type: 'gradient',
                 gradient: {
@@ -88,11 +95,11 @@ export default class HomeUI {
                 curve: 'smooth',
                 width: 2
             },
-            series: series,
+            series: options.series,
             xaxis: {
                 type : 'datetime',
-                min: xaxis[0],
-                max: xaxis[xaxis.length - 1],
+                min: options.xaxis[0],
+                max: options.xaxis[options.xaxis.length - 1],
                 labels: {
                     datetimeUTC: false,
                     datetimeFormatter: {
@@ -110,43 +117,73 @@ export default class HomeUI {
             }
         };
 
-        const chart = new ApexCharts(element, options);
+        const chart = new ApexCharts(options.element, chartOptions);
         chart.render();
     }
 
     async setRecentSalesTBody(element) {
-        const recentSales = await this.#homeService.getRecentSalesByPaging(0,5);
+        const recentSalesData = await this.#homeService.getRecentSalesByPaging(0,5);
         element.innerHTML = '';
-        recentSales.dtoData.forEach((item,index) => {
+        recentSalesData.dtoData.forEach((item,index) => {
             const tr = document.createElement('tr');
-            const revenue = this.#homeService.formatPrice(item.saleQuantity * item.salePrice);
-            const profit = this.#homeService.formatPrice(item.saleQuantity * (item.salePrice - item.originPrice));
-            const profitRate = (((item.saleQuantity* (item.salePrice - item.originPrice))/(item.saleQuantity * item.salePrice))*100).toFixed(0);
+            const revenue = Util.formatPrice(item.saleQuantity * item.salePrice);
+            const originPrice = Util.formatPrice(item.saleQuantity * item.originPrice);
+            const profit = Util.formatPrice(item.saleQuantity * (item.salePrice - item.originPrice));
             tr.innerHTML = `
-            <th>${index}</th>
-            <td>${item.saleDate}</td>
+            <th>${index+1}</th>
+            <td>${Util.formatDate(item.saleDate)}</td>
             <td>${item.productName}</td>
             <td>${item.saleQuantity}</td>
-            <td>${revenue}/${profit}\</td>
-            <td>${profitRate}%</td>
+            <td>${originPrice}/${revenue}\</td>
+            <td>${profit}</td>
             `;
             element.appendChild(tr);
         })
     }
 
-    #fillMissingData(originalData, dates,salesMetricsName) {
-        originalData = originalData || [];
-        return dates.map(date => {
-            const foundData = originalData.find(item => {
-                const itemDate = new Date(item.salesDate);
-                const dateDate = new Date(date);
-                return itemDate.getTime() === dateDate.getTime();
-            });
-            return foundData ? foundData[salesMetricsName] : 0;
-        });
+    async setTop3VendorSalesTBody(element,serviceMethod) {
+        const top3VendorSalesData = await this.#homeService[serviceMethod]();
+        element.innerHTML = '';
+        top3VendorSalesData.forEach((item,index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+            <th>${index+1}</th>
+            <td>${item.vendorName}</td>
+            <td>${item.totalVolume}</td>
+            <td>${Util.formatPrice(item.totalRevenue)}</td>
+            <td>${Util.formatPrice(item.totalProfit)}</td>
+            `
+            element.appendChild(tr);
+        })
     }
+
+
 
     get homeService() {
         return this.#homeService;
+    }
+
+    addPageTabClickEvent(element) {
+        element.addEventListener('click',e => {
+            const pageName = e.currentTarget.id;
+            switch (pageName) {
+                case 'index-page':
+                    if(nowPage === 'index-page') return;
+                    const indexMainElement = document.querySelector('[data-page="index-page"]');
+                    indexMainElement.style.display = 'block';
+                    document.querySelector(`[data-page=${nowPage}]`).style.display = 'none';
+                    window.nowPage ='index-page';
+                    break;
+                case 'product-reg-page':
+                    if(nowPage === 'product-reg-page') return;
+                    const productRegPageElement = document.querySelector('[data-page="product-reg-page"]');
+                    productRegPageElement.style.display = 'block';
+                    document.querySelector(`[data-page=${nowPage}]`).style.display = 'none';
+                    window.nowPage = 'product-reg-page'
+                    break;
+                default :
+                    return;
+            }
+        });
     }
 }

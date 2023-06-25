@@ -30,4 +30,9 @@ public class URLMappingController {
     public String signupPage() {
         return "pages-register";
     }
+
+    @GetMapping("/blank")
+    public String blankPage() {
+        return "pages-blank";
+    }
 }
