@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### web html ###
+src/main/resources/templates/
