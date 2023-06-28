@@ -42,8 +42,6 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductSale> productSales = new ArrayList<>();
 
-
-
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -51,4 +49,5 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "vendor_id")
     private Vendor vendor;
+
 }

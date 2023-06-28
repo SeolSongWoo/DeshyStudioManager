@@ -15,9 +15,12 @@ public class ProductSize {
     @GeneratedValue
     private Long ProductSizeId;
 
-    @Column(name = "size", nullable = false)
-    private Long size;
+    private String size;
 
-    @OneToMany(mappedBy = "product_size", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "product_category_id")
+    private ProductCategory category;
+
+    @OneToMany(mappedBy = "size")
     private List<Product> products = new ArrayList<>();
 }
