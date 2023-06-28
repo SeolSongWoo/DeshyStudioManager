@@ -22,8 +22,13 @@ public class Product {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "size", nullable = false)
-    private String size;
+    @ManyToOne
+    @JoinColumn(name = "product_size_id")
+    private ProductSize size;
+
+    @ManyToOne
+    @JoinColumn(name = "product_category_id")
+    private ProductCategory category;
 
     @Column(name = "origin_price", nullable = false)
     private Long originPrice;
@@ -33,8 +38,10 @@ public class Product {
 
     @Column(name = "purchase_date", nullable = false)
     private LocalDate purchaseDate;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductSale> productSales = new ArrayList<>();
+
 
 
     @ManyToOne

@@ -21,6 +21,7 @@ public class ProductSale {
     @Column(name = "sale_date", nullable = false)
     private LocalDateTime saleDate;
 
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
