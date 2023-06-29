@@ -20,6 +20,7 @@ public enum CommonCode {
     PAGE_NOT_FOUND(404, "Page not found"),
     USER_NOT_FOUND(404, "User not found"),
     FORBIDDEN(403, "Forbidden"),
+    DUPLICATE(409,"Duplicate Occurrence"),
 
     // Server error codes
     INTERNAL_SERVER_ERROR(500, "Internal server error");

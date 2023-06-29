@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RequestMapping("/api/products")
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<?>> registration(@RequestBody ProductRegDTO productRegDTO) {
-
+    public ResponseEntity<CommonResponse<?>> registration(@RequestBody ProductRegDTO productRegDTO, Principal principal) {
+        productService.registration(productRegDTO,principal.getName());
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
     }
 }

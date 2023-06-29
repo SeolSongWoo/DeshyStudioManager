@@ -47,6 +47,12 @@ public class RestGlobalExceptionHandler {
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.USER_NOT_FOUND),HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ProductDuplicateException.class)
+    public ResponseEntity<CommonResponse<?>> handleProductDuplicateExceptionHandler(ProductDuplicateException e) {
+        log.info("handleProductDuplicateExceptionHandler",e);
+        return new ResponseEntity<>(CommonResponse.fail(CommonCode.DUPLICATE),HttpStatus.CONFLICT);
+    }
+
 
 
     @ExceptionHandler(Exception.class)

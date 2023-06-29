@@ -14,6 +14,8 @@ public class ProductCategory {
     @GeneratedValue
     private Long productCategoryId;
 
+    private String category;
+
     @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 

@@ -1,11 +1,11 @@
 package com.deshy.stduio.deshystudiomanager.service.product;
 
 import com.deshy.stduio.deshystudiomanager.data.dto.ProductRegDTO;
-import com.deshy.stduio.deshystudiomanager.data.entity.Product;
-import com.deshy.stduio.deshystudiomanager.data.entity.ProductSale;
-import com.deshy.stduio.deshystudiomanager.repository.ProductRepository;
-import com.deshy.stduio.deshystudiomanager.repository.ProductSaleRepository;
+import com.deshy.stduio.deshystudiomanager.data.entity.*;
+import com.deshy.stduio.deshystudiomanager.exception.ProductDuplicateException;
+import com.deshy.stduio.deshystudiomanager.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,10 +19,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final MemberRepository memberRepository;
+    private final VendorRepository vendorRepository;
+    private final ProductSizeRepository productSizeRepository;
+    private final ProductCategoryRepository productCategoryRepository;
 
-    public void registration(ProductRegDTO productRegDTO) {
-        Optional<Product> product = productRepository.findByName(productRegDTO.getPrpProductName());
-        product.orElseThrow(RuntimeException::new);
+    public void registration(ProductRegDTO productRegDTO,String userId) {
+        Member member = memberRepository.findMemberById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + productRegDTO.getPrpProductName()));
 
+        Vendor vendor = vendorRepository.findByName(productRegDTO.getPrpProductVendor())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid vendor Name:" + productRegDTO.getPrpProductVendor()));
+
+        ProductSize size = productSizeRepository.findBySize(productRegDTO.getPrpProductSize())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid size Name:" + productRegDTO.getPrpProductSize()));
+
+        ProductCategory category = productCategoryRepository.findByCategory(productRegDTO.getPrpProductCategory())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category Name:" + productRegDTO.getPrpProductCategory()));
+        Product product = Product.createProduct(productRegDTO.getPrpProductName(),size,category,productRegDTO.getPrpProductOriginPrice()
+        ,productRegDTO.getPrpProductQuantity(),productRegDTO.getPrpRegDate(),member,vendor);
+        try {
+            productRepository.save(product);
+        } catch (DataIntegrityViolationException e) {
+            throw new ProductDuplicateException("중복 상품 존재: "+ productRegDTO.getPrpProductName());
+        }
     }
 }

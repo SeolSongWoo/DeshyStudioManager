@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +19,6 @@ public class Product {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "type", nullable = false)
-    private String type;
 
     @ManyToOne
     @JoinColumn(name = "product_size_id")
@@ -39,9 +37,6 @@ public class Product {
     @Column(name = "purchase_date", nullable = false)
     private LocalDate purchaseDate;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductSale> productSales = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -49,5 +44,23 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "vendor_id")
     private Vendor vendor;
+
+    protected Product(String name, ProductSize size, ProductCategory category, Long originPrice, Long stockQuantity, LocalDate purchaseDate, Member member, Vendor vendor) {
+        this.name = name;
+        this.size = size;
+        this.category = category;
+        this.originPrice = originPrice;
+        this.stockQuantity = stockQuantity;
+        this.purchaseDate = purchaseDate;
+        this.member = member;
+        this.vendor = vendor;
+    }
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductSale> productSales = new ArrayList<>();
+
+    public static Product createProduct(String name, ProductSize size, ProductCategory category, Long originPrice, Long stockQuantity, LocalDate purchaseDate,Member member, Vendor vendor) {
+        return new Product(name,size,category,originPrice,stockQuantity,purchaseDate,member,vendor);
+    }
 
 }
