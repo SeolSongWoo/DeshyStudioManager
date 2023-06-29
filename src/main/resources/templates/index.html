@@ -902,7 +902,7 @@
     </section>
 
 </main><!-- End #main -->
-<div th:insert="/product-reg-page.html :: main"></div>
+<div th:insert="~{/product-reg-page.html :: main}"></div>
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
@@ -933,7 +933,7 @@
 
 <!-- Template Main JS File -->
 <script th:src="@{../assets/js/main.js}"></script>
-<script type="module" th:src="@{../page/home/HomeIndex.js}"></script>
+<script type="module" th:src="@{../page/index.js}"></script>
 </body>
 <script>
     window.nowPage = 'index-page';

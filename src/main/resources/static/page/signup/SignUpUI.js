@@ -1,4 +1,5 @@
 import SignUpService from "./SignUpService.js";
+import Util from "../util/Util.js";
 
 export default class SignUpUI {
 
@@ -6,13 +7,13 @@ export default class SignUpUI {
         this.signupService = new SignUpService();
     }
 
-    async addSignupButtonClickEvent(element) {
+    addSignupButtonClickEvent(element) {
         element.addEventListener('submit', this.#signupButtonClickEventHandler);
     }
 
     #signupButtonClickEventHandler = async (event) => {
         event.preventDefault();
-        if(!this.#checkValidity(event)) return;
+        if(!Util.checkValidity(event)) return;
         const signupForm = document.querySelector('#signupForm');
         const signupData = this.#getSignupData(signupForm);
         const signupResult = await this.signupService.signUp(signupData);
@@ -38,12 +39,4 @@ export default class SignUpUI {
         return signupData;
     }
 
-    #checkValidity(event) {
-        if (!event.target.checkValidity()) {
-            event.stopPropagation();
-            event.target.classList.add('was-validated');
-            return false;
-        }
-        return true;
-    }
 }

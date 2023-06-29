@@ -43,8 +43,7 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Vendor> vendors = new ArrayList<>();
 
-    public Member(Long memberId, String name, String id, String password, String email, String phone, String role) {
-        this.memberId = memberId;
+    public Member(String name, String id, String password, String email, String phone, String role) {
         this.name = name;
         this.id = id;
         this.password = password;
@@ -54,6 +53,6 @@ public class Member {
     }
 
     public static Member createMember(String memberName, String memberId, String memberPassword, String memberEmail, String memberPhone, PasswordEncoder passwordEncoder) {
-        return new Member(null,memberName, memberId, passwordEncoder.encode(memberPassword), memberEmail, memberPhone, "USER");
+        return new Member(memberName, memberId, passwordEncoder.encode(memberPassword), memberEmail, memberPhone, "USER");
     }
 }
