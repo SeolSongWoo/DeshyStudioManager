@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @RequestMapping("/api/products")
 @RestController
 @RequiredArgsConstructor
@@ -20,15 +18,14 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<?>> createProduct(@UserCheck Member member) {
-        ProductRegDTO productRegDTO1 = new ProductRegDTO();
-        productService.createProduct(productRegDTO1,member);
+    public ResponseEntity<CommonResponse<?>> createProduct(@RequestBody ProductRegDTO productRegDTO, @UserCheck Member member) {
+        productService.createProduct(productRegDTO,member);
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
     }
 
-    @PostMapping("/size")
-    public ResponseEntity<CommonResponse<?>> createSize(@RequestParam String size,@UserCheck Member member) {
-        productService.createSize(size,member);
+    @PostMapping("/category")
+    public ResponseEntity<CommonResponse<?>> createCategory(@RequestBody String category) {
+        productService.createCategory(category,null);
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
     }
 }

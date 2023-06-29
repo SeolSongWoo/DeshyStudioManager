@@ -14,6 +14,7 @@ export default class ProductServerRequest extends Fetch {
 
     async createCategory(body) {
         return await this.fetch({
+            url: '/category',
             httpMethod: 'POST',
             body: body,
         })

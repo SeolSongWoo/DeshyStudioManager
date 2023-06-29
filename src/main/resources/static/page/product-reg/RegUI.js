@@ -36,11 +36,11 @@ export default class ProductRegUI {
         return regData;
     }
 
-    addSizeRegButtonClickEvent(formElement) {
-        formElement.addEventListener('submit',this.#sizeRegButtonClickEvent);
+    addCategoryRegButtonClickEvent(formElement) {
+        formElement.addEventListener('submit',this.#categoryRegButtonClickEventHandler);
     }
 
-    #sizeRegButtonClickEvent = async (e) => {
+    #categoryRegButtonClickEventHandler = async (e) => {
         e.preventDefault();
         if(!Util.checkValidity(e)) return;
         const sizeResult = await this.productRegService.createCategory({category:e.target.category.value});
@@ -53,7 +53,7 @@ export default class ProductRegUI {
         }
     }
 
-    addCategoryRegButtonClickEvent(elementById) {
+    addSizeRegButtonClickEvent(elementById) {
 
     }
 }

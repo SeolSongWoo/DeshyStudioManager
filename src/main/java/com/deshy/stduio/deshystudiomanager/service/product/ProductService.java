@@ -40,12 +40,7 @@ public class ProductService {
         }
     }
 
-    public void createSize(String size, Member member) {
+    public void createCategory(String category, Member member) {
 
-    }
-
-    private Member memberCheck(String userId) {
-        return memberRepository.findMemberById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + userId));
     }
 }
