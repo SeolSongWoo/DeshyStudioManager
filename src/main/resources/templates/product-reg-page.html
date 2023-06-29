@@ -22,11 +22,11 @@
                         <h5 class="card-title">상품등록</h5>
 
                         <!-- General Form Elements -->
-                        <form>
+                        <form class="needs-validation" id="productRegBtn" novalidate>
                             <div class="row mb-3">
                                 <label for="prpProductName" class="col-sm-2 col-form-label">상품명</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="prpProductName" id="prpProductName">
+                                    <input type="text" class="form-control" name="prpProductName" id="prpProductName" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -34,9 +34,9 @@
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="prpProductVendor" id="prpProductVendor"
-                                                aria-label="Floating label select example">
-                                            <option selected>거래처</option>
-                                            <option value="1">테스트</option>
+                                                aria-label="Floating label select example" required>
+                                            <option selected disabled value="">거래처</option>
+                                            <option value="블랙베리">블랙베리</option>
                                             <option value="2">테스트2</option>
                                             <option value="3">테스트3</option>
                                         </select>
@@ -45,45 +45,45 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductStyle" class="col-sm-2 col-form-label">종류(스타일)</label>
+                                <label for="prpProductCategory" class="col-sm-2 col-form-label">카테고리</label>
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" name="prpProductStyle" id="prpProductStyle"
-                                                aria-label="Floating label select example">
-                                            <option selected>종류(스타일)</option>
-                                            <option value="1">반팔티</option>
+                                        <select class="form-select" name="prpProductCategory" id="prpProductCategory"
+                                                aria-label="Floating label select example" required>
+                                            <option selected disabled value="">카테고리</option>
+                                            <option value="반팔티">반팔티</option>
                                             <option value="2">긴팔</option>
                                             <option value="3">빤쓰</option>
                                         </select>
-                                        <label for="prpProductStyle">종류(스타일)</label>
+                                        <label for="prpProductCategory">카테고리</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductStyle" class="col-sm-2 col-form-label">사이즈</label>
+                                <label for="prpProductSize" class="col-sm-2 col-form-label">사이즈</label>
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="prpProductSize" id="prpProductSize"
-                                                aria-label="Floating label select example">
-                                            <option selected>사이즈</option>
-                                            <option value="1">L</option>
+                                                aria-label="Floating label select example" required>
+                                            <option selected disabled value="">사이즈</option>
+                                            <option value="L">L</option>
                                             <option value="2">M</option>
                                             <option value="3">S</option>
                                         </select>
-                                        <label for="prpProductStyle">사이즈</label>
+                                        <label for="prpProductSize">사이즈</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="prpProductQuantity" class="col-sm-2 col-form-label">수량</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" name="prpProductQuantity" id="prpProductQuantity">
+                                    <input class="form-control" type="number" name="prpProductQuantity" id="prpProductQuantity" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="prpProductOriginPrice" class="col-sm-2 col-form-label">가격</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="prpProductOriginPrice" id="prpProductOriginPrice">
+                                    <input type="number" class="form-control" name="prpProductOriginPrice" id="prpProductOriginPrice" required>
                                 </div>
                             </div>
                             <div class="col-12">

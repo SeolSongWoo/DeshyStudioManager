@@ -7,6 +7,7 @@ import com.deshy.stduio.deshystudiomanager.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,9 +25,11 @@ public class ProductService {
     private final ProductSizeRepository productSizeRepository;
     private final ProductCategoryRepository productCategoryRepository;
 
+
+    @Transactional
     public void registration(ProductRegDTO productRegDTO,String userId) {
         Member member = memberRepository.findMemberById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + productRegDTO.getPrpProductName()));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + userId));
 
         Vendor vendor = vendorRepository.findByName(productRegDTO.getPrpProductVendor())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid vendor Name:" + productRegDTO.getPrpProductVendor()));
@@ -36,6 +39,7 @@ public class ProductService {
 
         ProductCategory category = productCategoryRepository.findByCategory(productRegDTO.getPrpProductCategory())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category Name:" + productRegDTO.getPrpProductCategory()));
+
         Product product = Product.createProduct(productRegDTO.getPrpProductName(),size,category,productRegDTO.getPrpProductOriginPrice()
         ,productRegDTO.getPrpProductQuantity(),productRegDTO.getPrpRegDate(),member,vendor);
         try {

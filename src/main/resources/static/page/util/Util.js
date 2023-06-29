@@ -18,4 +18,13 @@ export default class Util {
             return foundData ? foundData[salesMetricsName] : 0;
         });
     }
+
+    static checkValidity(event) {
+        if (!event.target.checkValidity()) {
+            event.stopPropagation();
+            event.target.classList.add('was-validated');
+            return false;
+        }
+        return true;
+    }
 }

@@ -20,6 +20,8 @@ public class QProductCategory extends EntityPathBase<ProductCategory> {
 
     public static final QProductCategory productCategory = new QProductCategory("productCategory");
 
+    public final StringPath category = createString("category");
+
     public final NumberPath<Long> productCategoryId = createNumber("productCategoryId", Long.class);
 
     public final ListPath<Product, QProduct> products = this.<Product, QProduct>createList("products", Product.class, QProduct.class, PathInits.DIRECT2);

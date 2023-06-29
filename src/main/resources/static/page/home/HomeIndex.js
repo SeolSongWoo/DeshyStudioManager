@@ -107,10 +107,8 @@ function asyncProcess() {
     );
 }
 
-async function initializeHome() {
+export async function initializeHome() {
     await asyncProcess();
     initEventListeners();
     initPageTab();
 }
-
-initializeHome();

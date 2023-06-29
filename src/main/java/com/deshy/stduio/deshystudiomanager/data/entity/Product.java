@@ -2,6 +2,7 @@ package com.deshy.stduio.deshystudiomanager.data.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "product")
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -55,6 +57,7 @@ public class Product {
         this.member = member;
         this.vendor = vendor;
     }
+
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductSale> productSales = new ArrayList<>();

@@ -40,8 +40,6 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final NumberPath<Long> stockQuantity = createNumber("stockQuantity", Long.class);
 
-    public final StringPath type = createString("type");
-
     public final QVendor vendor;
 
     public QProduct(String variable) {

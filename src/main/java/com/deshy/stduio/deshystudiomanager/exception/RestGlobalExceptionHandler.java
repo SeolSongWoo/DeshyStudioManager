@@ -53,6 +53,12 @@ public class RestGlobalExceptionHandler {
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.DUPLICATE),HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<CommonResponse<?>> handleIllegalArgumentExceptionHandler(IllegalArgumentException e) {
+        log.info("handleIllegalArgumentExceptionHandler",e);
+        return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+    }
+
 
 
     @ExceptionHandler(Exception.class)
