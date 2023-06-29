@@ -24,11 +24,15 @@ public class QProductSize extends EntityPathBase<ProductSize> {
 
     public final QProductCategory category;
 
+    public final QMember member;
+
     public final ListPath<Product, QProduct> products = this.<Product, QProduct>createList("products", Product.class, QProduct.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> ProductSizeId = createNumber("ProductSizeId", Long.class);
 
     public final StringPath size = createString("size");
+
+    public final ComparablePath<java.util.UUID> uid = createComparable("uid", java.util.UUID.class);
 
     public QProductSize(String variable) {
         this(ProductSize.class, forVariable(variable), INITS);
@@ -48,7 +52,8 @@ public class QProductSize extends EntityPathBase<ProductSize> {
 
     public QProductSize(Class<? extends ProductSize> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.category = inits.isInitialized("category") ? new QProductCategory(forProperty("category")) : null;
+        this.category = inits.isInitialized("category") ? new QProductCategory(forProperty("category"), inits.get("category")) : null;
+        this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
     }
 
 }

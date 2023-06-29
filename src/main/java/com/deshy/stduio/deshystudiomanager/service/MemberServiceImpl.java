@@ -23,4 +23,9 @@ public class MemberServiceImpl {
         Member member = Member.createMember(memberDTO.getName(), memberDTO.getId(), memberDTO.getPassword(), memberDTO.getEmail(), memberDTO.getPhone(), passwordEncoder);
         memberRepository.save(member);
     }
+
+    public Member memberCheck(String userId) {
+        return memberRepository.findMemberById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name: " + userId));
+    }
 }

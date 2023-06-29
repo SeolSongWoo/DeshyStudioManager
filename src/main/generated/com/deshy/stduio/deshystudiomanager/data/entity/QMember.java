@@ -20,6 +20,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public static final QMember member = new QMember("member1");
 
+    public final ListPath<ProductCategory, QProductCategory> categories = this.<ProductCategory, QProductCategory>createList("categories", ProductCategory.class, QProductCategory.class, PathInits.DIRECT2);
+
     public final StringPath email = createString("email");
 
     public final StringPath id = createString("id");
@@ -37,6 +39,8 @@ public class QMember extends EntityPathBase<Member> {
     public final ListPath<ProductSale, QProductSale> productSales = this.<ProductSale, QProductSale>createList("productSales", ProductSale.class, QProductSale.class, PathInits.DIRECT2);
 
     public final StringPath role = createString("role");
+
+    public final ListPath<ProductSize, QProductSize> sizes = this.<ProductSize, QProductSize>createList("sizes", ProductSize.class, QProductSize.class, PathInits.DIRECT2);
 
     public final ListPath<Vendor, QVendor> vendors = this.<Vendor, QVendor>createList("vendors", Vendor.class, QVendor.class, PathInits.DIRECT2);
 

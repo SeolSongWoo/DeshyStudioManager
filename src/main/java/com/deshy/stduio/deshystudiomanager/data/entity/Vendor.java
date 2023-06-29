@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "vendor")
@@ -21,6 +22,8 @@ public class Vendor {
     private Long floor;
     private String row;
     private String suite;
+
+    private UUID uid = UUID.randomUUID();
 
     @ManyToOne
     @JoinColumn(name = "member_id")

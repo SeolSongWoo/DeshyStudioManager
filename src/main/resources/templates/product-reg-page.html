@@ -24,76 +24,149 @@
                         <!-- General Form Elements -->
                         <form class="needs-validation" id="productRegBtn" novalidate>
                             <div class="row mb-3">
-                                <label for="prpProductName" class="col-sm-2 col-form-label">상품명</label>
+                                <label for="name-product" class="col-sm-2 col-form-label">상품명</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="prpProductName" id="prpProductName" required>
+                                    <input type="text" class="form-control" name="name" id="name-product"
+                                           required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductVendor" class="col-sm-2 col-form-label">거래처</label>
+                                <label for="vendor-product" class="col-sm-2 col-form-label">거래처</label>
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" name="prpProductVendor" id="prpProductVendor"
+                                        <select class="form-select" name="vendor" id="vendor-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">거래처</option>
                                             <option value="블랙베리">블랙베리</option>
                                             <option value="2">테스트2</option>
                                             <option value="3">테스트3</option>
                                         </select>
-                                        <label for="prpProductVendor">거래처</label>
+                                        <label for="vendor-product">거래처</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductCategory" class="col-sm-2 col-form-label">카테고리</label>
+                                <label for="category-product" class="col-sm-2 col-form-label">카테고리</label>
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" name="prpProductCategory" id="prpProductCategory"
+                                        <select class="form-select" name="category" id="category-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">카테고리</option>
                                             <option value="반팔티">반팔티</option>
                                             <option value="2">긴팔</option>
                                             <option value="3">빤쓰</option>
                                         </select>
-                                        <label for="prpProductCategory">카테고리</label>
+                                        <label for="category-product">카테고리</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductSize" class="col-sm-2 col-form-label">사이즈</label>
+                                <label for="size-product" class="col-sm-2 col-form-label">사이즈</label>
                                 <div class="col-sm-10">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" name="prpProductSize" id="prpProductSize"
+                                        <select class="form-select" name="size" id="size-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">사이즈</option>
                                             <option value="L">L</option>
                                             <option value="2">M</option>
                                             <option value="3">S</option>
                                         </select>
-                                        <label for="prpProductSize">사이즈</label>
+                                        <label for="size-product">사이즈</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductQuantity" class="col-sm-2 col-form-label">수량</label>
+                                <label for="quantity-product" class="col-sm-2 col-form-label">수량</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" name="prpProductQuantity" id="prpProductQuantity" required>
+                                    <input class="form-control" type="number" name="quantity"
+                                           id="quantity-product" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="prpProductOriginPrice" class="col-sm-2 col-form-label">가격</label>
+                                <label for="originPrice-product" class="col-sm-2 col-form-label">가격</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="prpProductOriginPrice" id="prpProductOriginPrice" required>
+                                    <input type="number" class="form-control" name="originPrice"
+                                           id="originPrice-product" required>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary float-end" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">등록</font></font></button>
+                                <button class="btn btn-primary float-end" type="submit"><font
+                                        style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">등록</font></font></button>
                             </div>
                         </form><!-- End General Form Elements -->
 
                     </div>
                 </div>
 
+            </div>
+            <div class="col-lg-6">
+                <div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">카테고리 등록</h5>
+
+                            <!-- Advanced Form Elements -->
+                            <form class="needs-validation" id="categoryRegBtn" novalidate>
+                                <div class="row mb-3">
+                                    <label for="category-category" class="col-sm-2 col-form-label">카테고리 명</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="category" id="category-category"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary float-end" type="submit"><font
+                                            style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">등록</font></font></button>
+                                </div>
+                            </form><!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">사이즈 등록</h5>
+
+                            <!-- Advanced Form Elements -->
+                            <form class="needs-validation" id="sizeRegBtn" novalidate>
+                                <div class="row mb-3">
+                                    <label for="category-size" class="col-sm-2 col-form-label">카테고리</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" name="category" id="category-size"
+                                                    aria-label="Floating label select example" required>
+                                                <option selected disabled value="">카테고리</option>
+                                                <option value="반팔티">반팔티</option>
+                                                <option value="2">M</option>
+                                                <option value="3">S</option>
+                                            </select>
+                                            <label for="category-size">카테고리</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="size-size" class="col-sm-2 col-form-label">사이즈 명</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="size" id="size-size"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary float-end" type="submit"><font
+                                            style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">등록</font></font></button>
+                                </div>
+                            </form><!-- End General Form Elements -->
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>

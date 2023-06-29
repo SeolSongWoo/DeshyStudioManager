@@ -9,12 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.YearMonth;
-import java.util.List;
-import java.util.Optional;
+import java.security.Principal;
 
 @Service
 @RequiredArgsConstructor
@@ -25,27 +20,32 @@ public class ProductService {
     private final ProductSizeRepository productSizeRepository;
     private final ProductCategoryRepository productCategoryRepository;
 
-
     @Transactional
-    public void registration(ProductRegDTO productRegDTO,String userId) {
-        Member member = memberRepository.findMemberById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + userId));
+    public void createProduct(ProductRegDTO productRegDTO,Member member) {
+        Vendor vendor = vendorRepository.findByUid(productRegDTO.getVendor())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid vendor Name:" + productRegDTO.getVendor()));
 
-        Vendor vendor = vendorRepository.findByName(productRegDTO.getPrpProductVendor())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid vendor Name:" + productRegDTO.getPrpProductVendor()));
+        ProductSize size = productSizeRepository.findByUid(productRegDTO.getSize())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid size Name:" + productRegDTO.getSize()));
 
-        ProductSize size = productSizeRepository.findBySize(productRegDTO.getPrpProductSize())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid size Name:" + productRegDTO.getPrpProductSize()));
+        ProductCategory category = productCategoryRepository.findByUid(productRegDTO.getCategory())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category Name:" + productRegDTO.getCategory()));
 
-        ProductCategory category = productCategoryRepository.findByCategory(productRegDTO.getPrpProductCategory())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category Name:" + productRegDTO.getPrpProductCategory()));
-
-        Product product = Product.createProduct(productRegDTO.getPrpProductName(),size,category,productRegDTO.getPrpProductOriginPrice()
-        ,productRegDTO.getPrpProductQuantity(),productRegDTO.getPrpRegDate(),member,vendor);
+        Product product = Product.createProduct(productRegDTO.getName(),size,category,productRegDTO.getOriginPrice()
+        ,productRegDTO.getQuantity(),productRegDTO.getRegDate(),member,vendor);
         try {
             productRepository.save(product);
         } catch (DataIntegrityViolationException e) {
-            throw new ProductDuplicateException("중복 상품 존재: "+ productRegDTO.getPrpProductName());
+            throw new ProductDuplicateException("중복 상품 존재: "+ productRegDTO.getName());
         }
+    }
+
+    public void createSize(String size, Member member) {
+
+    }
+
+    private Member memberCheck(String userId) {
+        return memberRepository.findMemberById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member Name:" + userId));
     }
 }

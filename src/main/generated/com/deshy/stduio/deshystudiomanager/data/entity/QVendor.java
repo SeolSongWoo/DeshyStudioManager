@@ -42,6 +42,8 @@ public class QVendor extends EntityPathBase<Vendor> {
 
     public final StringPath suite = createString("suite");
 
+    public final ComparablePath<java.util.UUID> uid = createComparable("uid", java.util.UUID.class);
+
     public final NumberPath<Long> vendorId = createNumber("vendorId", Long.class);
 
     public QVendor(String variable) {

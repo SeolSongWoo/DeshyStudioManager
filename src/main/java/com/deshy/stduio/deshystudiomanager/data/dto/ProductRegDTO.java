@@ -1,29 +1,34 @@
 package com.deshy.stduio.deshystudiomanager.data.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductRegDTO {
     @NotEmpty
-    private String prpProductName;
+    private String name;
     @NotEmpty
-    private String prpProductVendor;
+    private UUID vendor;
     @NotEmpty
-    private String prpProductCategory;
+    private UUID category;
     @NotEmpty
-    private String prpProductSize;
+    private UUID size;
     @NotEmpty
-    private Long prpProductQuantity;
+    private Long quantity;
     @NotEmpty
-    private Long prpProductOriginPrice;
+    private Long originPrice;
 
     @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate prpRegDate;
+    private LocalDate regDate;
 }

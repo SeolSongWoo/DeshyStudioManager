@@ -5,7 +5,11 @@ export default class ProductRegService {
         this.productServerRequest = new ProductServerRequest();
     }
 
-    async registration(body) {
-        return await this.productServerRequest.registration(body);
+    async createProduct(body) {
+        return await this.productServerRequest.createProduct(body);
+    }
+
+    async createCategory(body) {
+        return await this.productServerRequest.createCategory(body);
     }
 }

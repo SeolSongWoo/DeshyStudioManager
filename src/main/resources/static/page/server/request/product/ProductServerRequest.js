@@ -5,10 +5,17 @@ export default class ProductServerRequest extends Fetch {
         super('/api/products');
     }
 
-    async registration(body) {
+    async createProduct(body) {
         return await this.fetch({
             httpMethod: 'POST',
             body: body,
         });
+    }
+
+    async createCategory(body) {
+        return await this.fetch({
+            httpMethod: 'POST',
+            body: body,
+        })
     }
 }
