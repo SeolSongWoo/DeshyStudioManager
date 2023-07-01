@@ -40,8 +40,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath role = createString("role");
 
-    public final ListPath<ProductSize, QProductSize> sizes = this.<ProductSize, QProductSize>createList("sizes", ProductSize.class, QProductSize.class, PathInits.DIRECT2);
-
     public final ListPath<Vendor, QVendor> vendors = this.<Vendor, QVendor>createList("vendors", Vendor.class, QVendor.class, PathInits.DIRECT2);
 
     public QMember(String variable) {

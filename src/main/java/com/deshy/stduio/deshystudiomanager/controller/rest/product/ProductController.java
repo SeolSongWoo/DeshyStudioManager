@@ -1,6 +1,5 @@
 package com.deshy.stduio.deshystudiomanager.controller.rest.product;
 
-import com.deshy.stduio.deshystudiomanager.aop.UserCheck;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
 import com.deshy.stduio.deshystudiomanager.data.dto.ProductRegDTO;
@@ -18,8 +17,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<?>> createProduct(@RequestBody ProductRegDTO productRegDTO, @UserCheck Member member) {
-        productService.createProduct(productRegDTO,member);
+    public ResponseEntity<CommonResponse<?>> createProduct(@RequestBody ProductRegDTO productRegDTO) {
+        productService.createProduct(productRegDTO,null);
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
     }
 

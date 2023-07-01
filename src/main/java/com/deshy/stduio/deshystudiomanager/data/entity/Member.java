@@ -44,8 +44,6 @@ public class Member {
     private final List<Vendor> vendors = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<ProductCategory> categories = new ArrayList<>();
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<ProductSize> sizes = new ArrayList<>();
 
     public Member(String name, String id, String password, String email, String phone, String role) {
         this.name = name;

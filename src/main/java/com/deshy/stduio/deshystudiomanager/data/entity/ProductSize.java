@@ -25,9 +25,5 @@ public class ProductSize {
     @OneToMany(mappedBy = "size")
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
     private UUID uid = UUID.randomUUID();
 }
