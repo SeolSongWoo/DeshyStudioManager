@@ -19,4 +19,18 @@ export default class ProductServerRequest extends Fetch {
             body: body,
         })
     }
+
+    async getCategory() {
+        return await this.fetch({
+            url: '/category',
+            httpMethod: 'GET'
+        })
+    }
+
+    async deleteCategory(uid) {
+        return await this.fetch({
+            url: `/category/${uid}`,
+            httpMethod: 'DELETE'
+        })
+    }
 }

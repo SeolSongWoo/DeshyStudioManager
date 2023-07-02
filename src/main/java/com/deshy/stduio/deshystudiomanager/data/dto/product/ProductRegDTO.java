@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.data.dto;
+package com.deshy.stduio.deshystudiomanager.data.dto.product;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.data.dto;
+package com.deshy.stduio.deshystudiomanager.data.dto.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.querydsl.core.annotations.QueryProjection;

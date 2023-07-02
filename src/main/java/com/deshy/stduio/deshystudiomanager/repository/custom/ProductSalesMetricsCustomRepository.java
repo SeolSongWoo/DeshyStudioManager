@@ -1,7 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.repository.custom;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductSalesMetricsDTO;
-import com.deshy.stduio.deshystudiomanager.data.entity.ProductSale;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductSalesMetricsDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,15 +1,20 @@
 package com.deshy.stduio.deshystudiomanager.service.product;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductRegDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.CategoryDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.CategoryRegDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductRegDTO;
 import com.deshy.stduio.deshystudiomanager.data.entity.*;
-import com.deshy.stduio.deshystudiomanager.exception.ProductDuplicateException;
+import com.deshy.stduio.deshystudiomanager.exception.DuplicateException;
 import com.deshy.stduio.deshystudiomanager.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +41,28 @@ public class ProductService {
         try {
             productRepository.save(product);
         } catch (DataIntegrityViolationException e) {
-            throw new ProductDuplicateException("중복 상품 존재: "+ productRegDTO.getName());
+            throw new DuplicateException("중복 상품 존재: "+ productRegDTO.getName());
         }
     }
 
-    public void createCategory(String category, Member member) {
+    public void createCategory(CategoryRegDTO categoryRegDTO, Member member) {
+        ProductCategory category = ProductCategory.createCategory(categoryRegDTO.getCategory(), member);
+        try {
+            productCategoryRepository.save(category);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateException("중복 카테고리명 존재:"+ categoryRegDTO.getCategory());
+        }
+    }
 
+    public List<CategoryDTO> getCategory() {
+        List<ProductCategory> productCategories = productCategoryRepository.findAll();
+
+        return CategoryDTO.ofList(productCategories);
+    }
+
+    public void deleteCategory(UUID uid) {
+        ProductCategory category = productCategoryRepository.findByUid(uid).orElseThrow(() ->
+                new IllegalArgumentException("존재하지 않는 카테고리: "+uid));
+        productCategoryRepository.delete(category);
     }
 }

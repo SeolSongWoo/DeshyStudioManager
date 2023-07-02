@@ -3,7 +3,7 @@ package com.deshy.stduio.deshystudiomanager.controller.rest.product.sales;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
 import com.deshy.stduio.deshystudiomanager.data.dto.PageDTO;
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductSaleDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductSaleDTO;
 import com.deshy.stduio.deshystudiomanager.service.product.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

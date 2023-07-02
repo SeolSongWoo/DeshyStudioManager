@@ -1,6 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.service.product.metrics;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductSalesMetricsDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductSalesMetricsDTO;
 import com.deshy.stduio.deshystudiomanager.repository.ProductSaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

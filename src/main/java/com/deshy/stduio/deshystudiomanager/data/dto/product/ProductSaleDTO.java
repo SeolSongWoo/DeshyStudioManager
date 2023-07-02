@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.data.dto;
+package com.deshy.stduio.deshystudiomanager.data.dto.product;
 
 import com.deshy.stduio.deshystudiomanager.data.entity.ProductSale;
 import com.fasterxml.jackson.annotation.JsonInclude;

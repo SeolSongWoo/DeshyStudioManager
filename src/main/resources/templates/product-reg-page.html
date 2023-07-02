@@ -37,9 +37,6 @@
                                         <select class="form-select" name="vendor" id="vendor-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">거래처</option>
-                                            <option value="블랙베리">블랙베리</option>
-                                            <option value="2">테스트2</option>
-                                            <option value="3">테스트3</option>
                                         </select>
                                         <label for="vendor-product">거래처</label>
                                     </div>
@@ -52,9 +49,6 @@
                                         <select class="form-select" name="category" id="category-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">카테고리</option>
-                                            <option value="반팔티">반팔티</option>
-                                            <option value="2">긴팔</option>
-                                            <option value="3">빤쓰</option>
                                         </select>
                                         <label for="category-product">카테고리</label>
                                     </div>
@@ -67,9 +61,6 @@
                                         <select class="form-select" name="size" id="size-product"
                                                 aria-label="Floating label select example" required>
                                             <option selected disabled value="">사이즈</option>
-                                            <option value="L">L</option>
-                                            <option value="2">M</option>
-                                            <option value="3">S</option>
                                         </select>
                                         <label for="size-product">사이즈</label>
                                     </div>
@@ -110,10 +101,28 @@
                             <!-- Advanced Form Elements -->
                             <form class="needs-validation" id="categoryRegBtn" novalidate>
                                 <div class="row mb-3">
-                                    <label for="category-category" class="col-sm-2 col-form-label">카테고리 명</label>
-                                    <div class="col-sm-10">
+                                    <label for="category-category" class="col-sm-3 col-form-label">카테고리 명</label>
+                                    <div class="col-sm-9">
                                         <input type="text" class="form-control" name="category" id="category-category"
                                                required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="register-category" class="col-sm-3 col-form-label">등록된 카테고리</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-control" id="register-category" style="min-height: 35px;">
+                                            <div class="row" id="registered-category">
+                                                <div class="form-control custom-pa-pm" style="min-height: 25px; width: auto">
+                                                    <button type="button" name="CustomDeleteBtn" value="123" class="btn btn-danger btn-xs custom-btn-size"><span class="glyphicon glyphicon-remove">반팔티</span></button>
+                                                </div>
+                                                <div class="form-control custom-pa-pm" style="min-height: 25px; width: auto">
+                                                    <button type="button" name="CustomDeleteBtn" value="123" class="btn btn-danger btn-xs custom-btn-size" style="--bs-btn-line-height: 1;"><span class="glyphicon glyphicon-remove">긴팔</span></button>
+                                                </div>
+                                                <div class="form-control custom-pa-pm" style="min-height: 25px; width: auto"></div>
+                                                <div class="form-control custom-pa-pm" style="min-height: 25px; width: auto"></div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-12">
