@@ -21,3 +21,8 @@ spring:
       hibernate:
         format_sql: false
         use_sql_comments: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+

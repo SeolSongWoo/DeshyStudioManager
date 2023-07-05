@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<main id="main" class="main" data-page="product-reg-page" style="display: none">
+export const productRegTemplate = `
+<main id="main" class="main" data-page="product-reg-page">
 
     <div class="pagetitle">
         <h1>Form Elements</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
                 <li class="breadcrumb-item">상품관리</li>
                 <li class="breadcrumb-item active">상품등록</li>
             </ol>
@@ -181,4 +180,4 @@
     </section>
 
 </main><!-- End #main -->
-</html>
+`;
