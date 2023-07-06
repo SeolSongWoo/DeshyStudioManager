@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
@@ -35,11 +36,14 @@ public class WebSecurityConfig {
                         .requestMatchers("/page/util/Util.js").permitAll()
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                )
                 .formLogin(login -> login
                         .loginProcessingUrl("/api/users/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("http://localhost:3000/home", true)
+                        .defaultSuccessUrl("http://localhost:3000/v/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -63,6 +67,11 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
+    }
+
+    @Bean
+    AuthenticationEntryPoint authenticationEntryPoint() {
+        return new CustomAuthenticationEntryPoint();
     }
 
     @Bean
