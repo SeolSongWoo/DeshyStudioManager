@@ -2,10 +2,12 @@ package com.deshy.stduio.deshystudiomanager.data.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,8 @@ import java.util.List;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor
-public class Member {
+@AllArgsConstructor
+public class Member implements Serializable {
 
     @Id
     @GeneratedValue
@@ -42,6 +45,8 @@ public class Member {
     private final List<ProductSale> productSales = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Vendor> vendors = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<ProductCategory> categories = new ArrayList<>();
 
     public Member(String name, String id, String password, String email, String phone, String role) {
         this.name = name;

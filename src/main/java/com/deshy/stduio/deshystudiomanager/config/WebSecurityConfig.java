@@ -36,12 +36,13 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/api/users/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("http://localhost:3000/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/users/logout")
                         .logoutSuccessUrl("/login")
+                        .permitAll()
                 ).csrf(csrf -> csrf
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         return http.build();

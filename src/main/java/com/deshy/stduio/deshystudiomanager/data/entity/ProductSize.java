@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,4 +24,6 @@ public class ProductSize {
 
     @OneToMany(mappedBy = "size")
     private List<Product> products = new ArrayList<>();
+
+    private UUID uid = UUID.randomUUID();
 }

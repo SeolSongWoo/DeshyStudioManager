@@ -1,7 +1,7 @@
 package com.deshy.stduio.deshystudiomanager.service.product;
 
 import com.deshy.stduio.deshystudiomanager.data.dto.PageDTO;
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductSaleDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductSaleDTO;
 import com.deshy.stduio.deshystudiomanager.data.entity.ProductSale;
 import com.deshy.stduio.deshystudiomanager.repository.ProductSaleRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

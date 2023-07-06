@@ -1,7 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.repository.custom;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.ProductSalesMetricsDTO;
-import com.deshy.stduio.deshystudiomanager.data.dto.QProductSalesMetricsDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductSalesMetricsDTO;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.DateTimeExpression;

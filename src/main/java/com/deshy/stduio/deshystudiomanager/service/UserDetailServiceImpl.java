@@ -1,8 +1,9 @@
 package com.deshy.stduio.deshystudiomanager.service;
 
+import com.deshy.stduio.deshystudiomanager.authentication.CustomMember;
+import com.deshy.stduio.deshystudiomanager.authentication.CustomMemberAdapter;
 import com.deshy.stduio.deshystudiomanager.data.entity.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,10 +19,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> memberVO = memberService.findOne(username);
         Member member = memberVO.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
-        return User.builder()
-                .username(member.getId())
-                .password(member.getPassword())
-                .roles(member.getRole())
-                .build();
+        return new CustomMemberAdapter(member);
     }
 }
