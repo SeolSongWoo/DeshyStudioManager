@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.config.security;
+package com.deshy.stduio.deshystudiomanager.config;
 
 import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
+                        .loginPage("/login")
                         .loginProcessingUrl("/api/users/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
@@ -42,7 +43,8 @@ public class WebSecurityConfig {
                         .logoutUrl("/api/users/logout")
                         .logoutSuccessUrl("/login")
                         .permitAll()
-                );
+                ).csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         return http.build();
     }
 
