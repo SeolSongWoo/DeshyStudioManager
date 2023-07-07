@@ -23,7 +23,7 @@ public class ProductCategory {
     @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.REMOVE)
     private List<ProductSize> sizes = new ArrayList<>();
 
     @ManyToOne
