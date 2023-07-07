@@ -8,7 +8,4 @@ import java.util.UUID;
 
 public interface ProductSizeRepository extends JpaRepository<ProductSize, Long> {
     Optional<ProductSize> findByUid(UUID uid);
-
-    @Query("SELECT ps FROM ProductSize ps JOIN FETCH ps.category c WHERE c.uid = :categoryUid")
-    List<ProductSize> findByCategoryUid(UUID categoryUid);
 }

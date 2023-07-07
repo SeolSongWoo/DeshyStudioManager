@@ -18,7 +18,7 @@ public class Vendor {
     private String phone;
     private String email;
     private String description;
-    private String store;
+    private String arcade;
     private Long floor;
     private String row;
     private String suite;
