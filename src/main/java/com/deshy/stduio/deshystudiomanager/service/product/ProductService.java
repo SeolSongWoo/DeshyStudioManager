@@ -1,8 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.service.product;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.product.CategoryDTO;
-import com.deshy.stduio.deshystudiomanager.data.dto.product.CategoryRegDTO;
-import com.deshy.stduio.deshystudiomanager.data.dto.product.ProductRegDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.product.*;
 import com.deshy.stduio.deshystudiomanager.data.entity.*;
 import com.deshy.stduio.deshystudiomanager.exception.DuplicateException;
 import com.deshy.stduio.deshystudiomanager.repository.*;
@@ -11,9 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -46,7 +42,7 @@ public class ProductService {
     }
 
     public void createCategory(CategoryRegDTO categoryRegDTO, Member member) {
-        ProductCategory category = ProductCategory.createCategory(categoryRegDTO.getCategory(), member);
+        ProductCategory category = ProductCategory.create(categoryRegDTO.getCategory(), member);
         try {
             productCategoryRepository.save(category);
         } catch (DataIntegrityViolationException e) {
@@ -64,5 +60,28 @@ public class ProductService {
         ProductCategory category = productCategoryRepository.findByUid(uid).orElseThrow(() ->
                 new IllegalArgumentException("존재하지 않는 카테고리: "+uid));
         productCategoryRepository.delete(category);
+    }
+
+    public void createSize(SizeRegDTO sizeRegDTO) {
+        ProductCategory category = productCategoryRepository.findByUid(sizeRegDTO.getCategoryUid())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid vendor Name:" + sizeRegDTO.getCategoryUid()));
+        ProductSize size = ProductSize.create(category,sizeRegDTO.getSizeName());
+
+        try {
+            productSizeRepository.save(size);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateException("중복 사이즈명 존재:"+ sizeRegDTO.getSizeName());
+        }
+    }
+
+    public List<SizeDTO> getSizeByCategoryUid(UUID categoryUid) {
+        List<ProductSize> productSizes = productSizeRepository.findByCategoryUid(categoryUid);
+        return SizeDTO.ofList(productSizes);
+    }
+
+    public void deleteSize(UUID uid) {
+        ProductSize size = productSizeRepository.findByUid(uid).orElseThrow(() ->
+                new IllegalArgumentException("존재하지 않는 사이즈: "+uid));
+        productSizeRepository.delete(size);
     }
 }
