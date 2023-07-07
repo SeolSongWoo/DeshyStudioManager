@@ -32,12 +32,12 @@ public class ProductCategory {
 
     private UUID uid = UUID.randomUUID();
 
-    public ProductCategory(String category, Member member) {
+    protected ProductCategory(String category, Member member) {
         this.category = category;
         this.member = member;
     }
 
-    public static ProductCategory createCategory(String category, Member member) {
+    public static ProductCategory create(String category, Member member) {
         return new ProductCategory(category,member);
     }
 }
