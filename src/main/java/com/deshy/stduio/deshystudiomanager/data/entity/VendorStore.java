@@ -28,4 +28,13 @@ public class VendorStore {
     private Member member;
 
     private UUID uid = UUID.randomUUID();
+
+    protected VendorStore(String store, Member member) {
+        this.store = store;
+        this.member = member;
+    }
+
+    public static VendorStore create(String store, Member member) {
+        return new VendorStore(store,member);
+    }
 }

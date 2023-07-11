@@ -22,8 +22,6 @@ public class QVendor extends EntityPathBase<Vendor> {
 
     public static final QVendor vendor = new QVendor("vendor");
 
-    public final StringPath arcade = createString("arcade");
-
     public final StringPath description = createString("description");
 
     public final StringPath email = createString("email");
@@ -39,6 +37,8 @@ public class QVendor extends EntityPathBase<Vendor> {
     public final ListPath<Product, QProduct> products = this.<Product, QProduct>createList("products", Product.class, QProduct.class, PathInits.DIRECT2);
 
     public final StringPath row = createString("row");
+
+    public final QVendorStore store;
 
     public final StringPath suite = createString("suite");
 
@@ -65,6 +65,7 @@ public class QVendor extends EntityPathBase<Vendor> {
     public QVendor(Class<? extends Vendor> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
+        this.store = inits.isInitialized("store") ? new QVendorStore(forProperty("store"), inits.get("store")) : null;
     }
 
 }

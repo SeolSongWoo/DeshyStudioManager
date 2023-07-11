@@ -42,6 +42,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final ListPath<Vendor, QVendor> vendors = this.<Vendor, QVendor>createList("vendors", Vendor.class, QVendor.class, PathInits.DIRECT2);
 
+    public final ListPath<VendorStore, QVendorStore> vendorStores = this.<VendorStore, QVendorStore>createList("vendorStores", VendorStore.class, QVendorStore.class, PathInits.DIRECT2);
+
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
     }
