@@ -21,7 +21,6 @@ public class ProductSaleDTO {
     private Long salePrice;
     private Long originPrice;
 
-    //Change this to a static method that takes a ProductSale object and returns a ProductSaleDTO object
     public static ProductSaleDTO of(ProductSale productSale) {
         return ProductSaleDTO.builder()
                 .saleDate(productSale.getSaleDate())

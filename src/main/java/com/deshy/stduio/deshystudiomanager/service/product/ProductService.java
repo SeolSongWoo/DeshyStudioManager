@@ -41,6 +41,10 @@ public class ProductService {
         }
     }
 
+    public List<ProductDTO> getProducts(Member member) {
+        return ProductDTO.ofList(productRepository.findAllByMember(member));
+    }
+
     public void createCategory(CategoryRegDTO categoryRegDTO, Member member) {
         ProductCategory category = ProductCategory.create(categoryRegDTO.getCategory(), member);
         try {

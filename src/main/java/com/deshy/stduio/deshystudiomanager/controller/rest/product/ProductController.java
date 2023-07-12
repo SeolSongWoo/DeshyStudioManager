@@ -26,6 +26,11 @@ public class ProductController {
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<CommonResponse<List<ProductDTO>>> getProducts(@AuthUser Member member) {
+        return new ResponseEntity<>(CommonResponse.success(productService.getProducts(member),CommonCode.FOUND_OK),HttpStatus.OK);
+    }
+
     @PostMapping("/category")
     public ResponseEntity<CommonResponse<?>> createCategory(@RequestBody CategoryRegDTO category, @AuthUser Member member) {
         productService.createCategory(category,member);
