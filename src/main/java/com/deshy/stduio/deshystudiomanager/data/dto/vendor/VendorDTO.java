@@ -18,6 +18,7 @@ public class VendorDTO {
     private String row;
     private String suite;
     private String description;
+    private UUID uid;
 
     public static VendorDTO of(Vendor vendor) {
         return VendorDTO.builder()
@@ -28,7 +29,8 @@ public class VendorDTO {
                 .floor(vendor.getFloor())
                 .row(vendor.getRow())
                 .suite(vendor.getSuite())
-                .description(vendor.getDescription()).build();
+                .description(vendor.getDescription())
+                .uid(vendor.getUid()).build();
     }
 
     public static List<VendorDTO> ofList(List<Vendor> vendors) {
