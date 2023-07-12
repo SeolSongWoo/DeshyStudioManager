@@ -1,6 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.service;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.VendorSalesDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.vendor.VendorSalesDTO;
 import com.deshy.stduio.deshystudiomanager.repository.VendorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

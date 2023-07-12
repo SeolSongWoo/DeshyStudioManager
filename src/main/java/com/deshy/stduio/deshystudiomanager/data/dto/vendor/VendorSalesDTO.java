@@ -1,4 +1,4 @@
-package com.deshy.stduio.deshystudiomanager.data.dto;
+package com.deshy.stduio.deshystudiomanager.data.dto.vendor;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

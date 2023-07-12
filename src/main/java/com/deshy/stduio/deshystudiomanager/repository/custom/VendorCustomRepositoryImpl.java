@@ -1,6 +1,6 @@
 package com.deshy.stduio.deshystudiomanager.repository.custom;
 
-import com.deshy.stduio.deshystudiomanager.data.dto.VendorSalesDTO;
+import com.deshy.stduio.deshystudiomanager.data.dto.vendor.VendorSalesDTO;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;

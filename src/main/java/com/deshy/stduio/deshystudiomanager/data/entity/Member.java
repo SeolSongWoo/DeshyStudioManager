@@ -47,6 +47,8 @@ public class Member implements Serializable {
     private final List<Vendor> vendors = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<ProductCategory> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<VendorStore> vendorStores = new ArrayList<>();
 
     public Member(String name, String id, String password, String email, String phone, String role) {
         this.name = name;
