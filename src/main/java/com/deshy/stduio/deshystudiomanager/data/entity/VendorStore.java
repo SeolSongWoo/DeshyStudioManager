@@ -20,7 +20,7 @@ public class VendorStore {
     @Column(name = "store", nullable = false, unique = true)
     private String store;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store",orphanRemoval = true)
     private List<Vendor> vendors = new ArrayList<>();
 
     @ManyToOne
