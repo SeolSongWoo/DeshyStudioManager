@@ -34,8 +34,8 @@ public class VendorService {
         }
     }
 
-    public List<VendorDTO> getVendors() {
-        return VendorDTO.ofList(vendorRepository.findAll());
+    public List<VendorDTO> getVendors(Member member) {
+        return VendorDTO.ofList(vendorRepository.findAllByMember(member));
     }
 
     public void deleteVendor(UUID uid) {

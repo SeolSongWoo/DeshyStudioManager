@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -47,6 +48,8 @@ public class Product {
     @JoinColumn(name = "vendor_id")
     private Vendor vendor;
 
+    private UUID uid = UUID.randomUUID();
+
     protected Product(String name, ProductSize size, ProductCategory category, Long originPrice, Long stockQuantity, LocalDate purchaseDate, Member member, Vendor vendor) {
         this.name = name;
         this.size = size;
@@ -64,6 +67,15 @@ public class Product {
 
     public static Product createProduct(String name, ProductSize size, ProductCategory category, Long originPrice, Long stockQuantity, LocalDate purchaseDate,Member member, Vendor vendor) {
         return new Product(name,size,category,originPrice,stockQuantity,purchaseDate,member,vendor);
+    }
+
+    public void update(String name, Long originPrice,Long stockQuantity,ProductCategory category, ProductSize size, Vendor vendor) {
+        this.name = name;
+        this.originPrice = originPrice;
+        this.stockQuantity = stockQuantity;
+        this.category = category;
+        this.size = size;
+        this.vendor = vendor;
     }
 
 }

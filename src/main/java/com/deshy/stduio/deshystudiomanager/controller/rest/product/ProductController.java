@@ -5,6 +5,7 @@ import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonCode;
 import com.deshy.stduio.deshystudiomanager.controller.rest.response.CommonResponse;
 import com.deshy.stduio.deshystudiomanager.data.dto.product.*;
 import com.deshy.stduio.deshystudiomanager.data.entity.Member;
+import com.deshy.stduio.deshystudiomanager.data.entity.Product;
 import com.deshy.stduio.deshystudiomanager.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,23 @@ public class ProductController {
     public ResponseEntity<CommonResponse<?>> createProduct(@RequestBody ProductRegDTO productRegDTO, @AuthUser Member member) {
         productService.createProduct(productRegDTO,member);
         return new ResponseEntity<>(CommonResponse.success(null, CommonCode.CREATE_OK), HttpStatus.OK);
+    }
+
+    @PatchMapping
+    public ResponseEntity<CommonResponse<?>> updateProduct(@RequestBody ProductRegDTO productRegDTO) {
+        productService.updateProduct(productRegDTO);
+        return new ResponseEntity<>(CommonResponse.success(null,CommonCode.UPDATE_OK),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{uid}")
+    public ResponseEntity<CommonResponse<?>> deleteProduct(@PathVariable UUID uid) {
+        productService.deleteProduct(uid);
+        return new ResponseEntity<>(CommonResponse.success(null,CommonCode.UPDATE_OK),HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<CommonResponse<List<ProductDTO>>> getProducts(@AuthUser Member member) {
+        return new ResponseEntity<>(CommonResponse.success(productService.getProducts(member),CommonCode.FOUND_OK),HttpStatus.OK);
     }
 
     @PostMapping("/category")

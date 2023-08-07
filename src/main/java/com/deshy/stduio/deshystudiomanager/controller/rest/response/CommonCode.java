@@ -9,7 +9,7 @@ public enum CommonCode {
 
     // Success codes
     INSERT_OK(201, "Insertion successful"),
-    UPDATE_OK(204, "Post successful"),
+    UPDATE_OK(204, "Update successful"),
     DELETE_OK(204, "Deletion successful"),
     CREATE_OK(201, "Creation successful"),
     FOUND_OK(200, "Resource found"),
@@ -21,6 +21,7 @@ public enum CommonCode {
     USER_NOT_FOUND(404, "User not found"),
     FORBIDDEN(403, "Forbidden"),
     DUPLICATE(409,"Duplicate Occurrence"),
+    CONFLICT(409, "Conflict"),
 
     // Server error codes
     INTERNAL_SERVER_ERROR(500, "Internal server error");

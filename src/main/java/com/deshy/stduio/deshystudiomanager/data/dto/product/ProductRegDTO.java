@@ -27,6 +27,8 @@ public class ProductRegDTO {
     private Long quantity;
     @NotEmpty
     private Long originPrice;
+    @NotEmpty
+    private UUID uid;
 
     @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -29,8 +29,8 @@ public class VendorController {
     }
 
     @GetMapping
-    public ResponseEntity<CommonResponse<List<VendorDTO>>> getVendors() {
-        return new ResponseEntity<>(CommonResponse.success(vendorService.getVendors(),CommonCode.FOUND_OK),HttpStatus.OK);
+    public ResponseEntity<CommonResponse<List<VendorDTO>>> getVendors(@AuthUser Member member) {
+        return new ResponseEntity<>(CommonResponse.success(vendorService.getVendors(member),CommonCode.FOUND_OK),HttpStatus.OK);
     }
 
     @DeleteMapping("/{uid}")
