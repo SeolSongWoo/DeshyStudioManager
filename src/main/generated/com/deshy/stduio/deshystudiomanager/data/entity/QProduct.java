@@ -40,6 +40,8 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final NumberPath<Long> stockQuantity = createNumber("stockQuantity", Long.class);
 
+    public final ComparablePath<java.util.UUID> uid = createComparable("uid", java.util.UUID.class);
+
     public final QVendor vendor;
 
     public QProduct(String variable) {

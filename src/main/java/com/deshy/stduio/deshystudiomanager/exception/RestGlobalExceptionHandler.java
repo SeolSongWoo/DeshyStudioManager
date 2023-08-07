@@ -59,6 +59,12 @@ public class RestGlobalExceptionHandler {
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EntityUpdateFailException.class)
+    public ResponseEntity<CommonResponse<?>> handleEntityUpdateFailException(EntityUpdateFailException e) {
+        log.info("EntityUpdateFailExceptionHandler",e);
+        return new ResponseEntity<>(CommonResponse.fail(CommonCode.CONFLICT),HttpStatus.CONFLICT);
+    }
+
 
 
     @ExceptionHandler(Exception.class)

@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -18,6 +19,7 @@ public class ProductDTO {
     private String category;
     private String size;
     private String vendor;
+    private UUID uid;
 
     public static ProductDTO of(Product product) {
         return ProductDTO.builder()
@@ -28,6 +30,7 @@ public class ProductDTO {
                 .category(product.getCategory().getCategory())
                 .size(product.getSize().getSize())
                 .vendor(product.getVendor().getName())
+                .uid(product.getUid())
                 .build();
     }
     public static List<ProductDTO> ofList(List<Product> products) {
