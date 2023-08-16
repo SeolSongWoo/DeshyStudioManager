@@ -65,6 +65,11 @@ public class RestGlobalExceptionHandler {
         return new ResponseEntity<>(CommonResponse.fail(CommonCode.CONFLICT),HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(OutOfStockException.class)
+    public ResponseEntity<CommonResponse<?>> handleOutOfStockException(OutOfStockException e) {
+        log.info("OutOfStockExceptionHandler",e);
+        return new ResponseEntity<>(CommonResponse.fail(CommonCode.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+    }
 
 
     @ExceptionHandler(Exception.class)

@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductSaleDTO {
     private LocalDateTime saleDate;
     private String productName;
+    private UUID product;
     private Long saleQuantity;
     private Long salePrice;
     private Long originPrice;
@@ -25,6 +27,7 @@ public class ProductSaleDTO {
         return ProductSaleDTO.builder()
                 .saleDate(productSale.getSaleDate())
                 .productName(productSale.getProduct().getName())
+                .product(productSale.getProduct().getUid())
                 .saleQuantity(productSale.getSaleQuantity())
                 .salePrice(productSale.getSalePrice())
                 .originPrice(productSale.getProduct().getOriginPrice())

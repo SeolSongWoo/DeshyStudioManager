@@ -78,4 +78,8 @@ public class Product {
         this.vendor = vendor;
     }
 
+    public void saleProduct(Long saleQuantity) {
+        this.stockQuantity = this.stockQuantity - saleQuantity;
+    }
+
 }
