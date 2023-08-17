@@ -1,6 +1,7 @@
 package com.deshy.stduio.deshystudiomanager.config.security;
 
 import jakarta.servlet.DispatcherType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -21,6 +22,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class WebSecurityConfig {
 
+    @Value("${host.client}")
+    private static String CLIENT_SERVER_HOST;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -43,7 +46,7 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/api/users/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("http://localhost:3000/v/home", true)
+                        .defaultSuccessUrl(CLIENT_SERVER_HOST+"/v/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -59,7 +62,7 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin(CLIENT_SERVER_HOST);
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
