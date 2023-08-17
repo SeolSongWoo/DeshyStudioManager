@@ -23,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfig {
 
     @Value("${host.client}")
-    private static String CLIENT_SERVER_HOST;
+    private String CLIENT_SERVER_HOST;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
