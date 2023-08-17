@@ -23,7 +23,7 @@ public class ProductCategory {
     @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "category",cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<ProductSize> sizes = new ArrayList<>();
 
     @ManyToOne
@@ -38,6 +38,9 @@ public class ProductCategory {
     }
 
     public static ProductCategory create(String category, Member member) {
-        return new ProductCategory(category,member);
+        ProductCategory productCategory = new ProductCategory(category,member);
+        ProductSize defaultSize = ProductSize.create(productCategory,"공통");
+        productCategory.getSizes().add(defaultSize);
+        return productCategory;
     }
 }
