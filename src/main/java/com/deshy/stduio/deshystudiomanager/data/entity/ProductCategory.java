@@ -39,8 +39,8 @@ public class ProductCategory {
 
     public static ProductCategory create(String category, Member member) {
         ProductCategory productCategory = new ProductCategory(category,member);
-        ProductSize defaultSize = ProductSize.create(productCategory,"공통");
-        productCategory.getSizes().add(defaultSize);
+        productCategory.getSizes().add(ProductSize.create(productCategory,"-"));
+        productCategory.getSizes().add(ProductSize.create(productCategory,"F"));
         return productCategory;
     }
 }
