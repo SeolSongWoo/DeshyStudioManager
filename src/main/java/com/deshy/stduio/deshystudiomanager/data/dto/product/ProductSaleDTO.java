@@ -22,6 +22,7 @@ public class ProductSaleDTO {
     private Long saleQuantity;
     private Long salePrice;
     private Long originPrice;
+    private String payment;
 
     public static ProductSaleDTO of(ProductSale productSale) {
         return ProductSaleDTO.builder()
@@ -31,9 +32,11 @@ public class ProductSaleDTO {
                 .saleQuantity(productSale.getSaleQuantity())
                 .salePrice(productSale.getSalePrice())
                 .originPrice(productSale.getProduct().getOriginPrice())
+                .payment(productSale.getPayment())
                 .build();
     }
     public static List<ProductSaleDTO> ofList(List<ProductSale> productSales) {
         return productSales.stream().map(ProductSaleDTO::of).toList();
     }
+
 }

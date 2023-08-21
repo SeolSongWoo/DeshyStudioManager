@@ -26,6 +26,8 @@ public class ProductSale {
     private Long salePrice;
     @Column(name = "sale_date", nullable = false)
     private LocalDateTime saleDate;
+    @Column(name = "payment",nullable = false)
+    private String payment;
 
     private UUID uid = UUID.randomUUID();
 
@@ -39,15 +41,16 @@ public class ProductSale {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    protected ProductSale(Long saleQuantity, Long salePrice, LocalDateTime saleDate, Member member, Product product) {
+    protected ProductSale(Long saleQuantity, Long salePrice, LocalDateTime saleDate,String payment, Member member, Product product) {
         this.saleQuantity = saleQuantity;
         this.salePrice = salePrice;
         this.saleDate = saleDate;
         this.member = member;
         this.product = product;
+        this.payment = payment;
     }
 
-    public static ProductSale createProductSale(Member member, Product product, Long saleQuantity, Long salePrice, LocalDateTime saleDate) {
-        return new ProductSale(saleQuantity,salePrice,saleDate,member,product);
+    public static ProductSale createProductSale(Member member, Product product, Long saleQuantity, Long salePrice, LocalDateTime saleDate, String payment) {
+        return new ProductSale(saleQuantity,salePrice,saleDate,payment,member,product);
     }
 }

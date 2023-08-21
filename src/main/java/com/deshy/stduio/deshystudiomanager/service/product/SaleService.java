@@ -30,7 +30,7 @@ public class SaleService {
     public void saleProduct(ProductSaleDTO productSaleDTO, Member member) {
         Product product = productRepository.findByUid(productSaleDTO.getProduct())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Product:" + productSaleDTO.getProduct()));
-        ProductSale productSale = ProductSale.createProductSale(member,product, productSaleDTO.getSaleQuantity(), productSaleDTO.getSalePrice(), productSaleDTO.getSaleDate());
+        ProductSale productSale = ProductSale.createProductSale(member,product, productSaleDTO.getSaleQuantity(), productSaleDTO.getSalePrice(), productSaleDTO.getSaleDate(),productSaleDTO.getPayment());
         productSaleRepository.save(productSale);
         if(product.getStockQuantity() > productSale.getSaleQuantity()) {
             product.saleProduct(productSale.getSaleQuantity());
